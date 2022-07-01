@@ -5,8 +5,10 @@ venv/
 .env
 .log.*
 
-dir/backup/*
-dir/logs/critic/*
-dir/logs/debug/*
-dir/logs/info/*
-dir/logs/warning/*
+.dump
+.psql
+.bin
+.psql.bin
+
+.tar.xz
+

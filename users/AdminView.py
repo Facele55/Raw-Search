@@ -9,10 +9,9 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView, UpdateView, FormView
 
 from analytics.counts import *
-from core.models import ContentSearchIndex, Autocomplete, SearchQueries
+from core.models import Autocomplete
 from crawler.crawl_views import site_crawler, page_crawler
 from crawler.models import CrawlerPages, CrawlerSites, CrawlQueue
-from crawler.services import add_url_to_crawl_queue
 from feedback.models import Feedback, Support, Problem, Contact
 from rawsearch.settings import ELASTICSEARCH_DSL
 from .forms import EditUserPermForm, QueueForm
