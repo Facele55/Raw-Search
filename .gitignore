@@ -3,9 +3,15 @@ venv/
 .idea/
 
 .env
-.log.*
 
-.dump
+dir/backup/*
+
+dir/logs/critic/*.log.*
+dir/logs/debug/.log.*
+dir/logs/info/.log.*
+dir/logs/warning/.log.*
+
+
 .psql
 .bin
 .psql.bin
