@@ -4,15 +4,21 @@ venv/
 
 .env
 
-dir/logs/critic/.log.*
-dir/logs/debug/.log.*
-dir/logs/info/.log.*
-dir/logs/warning/.log.*
+/dir/logs/critic/critic.log
+/dir/logs/critic/critic.log.*
 
-.dump
-.psql
-.bin
-.psql.bin
+/dir/logs/debug/debug.log
+/dir/logs/debug/debug.log.*
 
-.tar.xz
+/dir/logs/info/info.log
+/dir/logs/info/info.log.*
+
+/dir/logs/warning/warning.log
+/dir/logs/warning/warning.log.*
+
+/dir/backup/crawler_db-*.psql
+/dir/backup/search_db-*.psql
+/dir/backup/analytics_db-*.psql
+/dir/backup/feedback_db-*.dump
+/dir/backup/users_db-*.dump
 
