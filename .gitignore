@@ -4,14 +4,12 @@ venv/
 
 .env
 
-dir/backup/*
-
-dir/logs/critic/*.log.*
+dir/logs/critic/.log.*
 dir/logs/debug/.log.*
 dir/logs/info/.log.*
 dir/logs/warning/.log.*
 
-
+.dump
 .psql
 .bin
 .psql.bin
