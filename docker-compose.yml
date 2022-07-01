@@ -1,0 +1,97 @@
+services:
+# WARNING: DON'T USE FOR PRODUCTION. DOCKER IMAGE IS UNSTABLE AND DOES NOT HAVE SUITABLE SETTINGS.
+  es:
+    # WARNING: The elasticsearch service is not configured properly.
+    image: "elasticsearch:7.8.1"
+    expose:
+      - 9200
+    #ports:
+    #  - "9200:9200"
+    #  - "9300:9300"
+    environment:
+      - xpack.security.enabled=false
+      - bootstrap.memory_lock=true
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms2g -Xmx2g
+      - cluster.routing.allocation.disk.threshold_enabled=false
+    container_name: es
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+
+    networks:
+      - raw-network
+    healthcheck:
+       test: curl -s http://localhost:9200 >/dev/null || exit 1
+       interval: 30s
+       timeout: 10s
+       retries: 50
+
+
+    volumes:
+      - data:/usr/share/elasticsearch/data
+
+  db:
+    image: "postgres:14"
+    container_name: db
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+      - DOCKER=True
+      - POSTGRES_MULTIPLE_DATABASES=raw_search,raw_crawler,raw_analytic
+      - POSTGRES_USER=raw_searcher
+      - POSTGRES_PASSWORD=aq1sw2de3
+      - DATABASE_HOST=db
+    #restart: on-failure
+    expose:
+      - 5432
+    volumes:
+        - ./docker-postgresql-multiple-databases:/docker-entrypoint-initdb.d
+    networks:
+      - raw-network
+
+
+
+  web:
+    build: .
+
+    env_file:
+        - .env
+    volumes:
+      - .:/code
+    depends_on:
+      - es
+      - db
+
+    ports:
+      - "8000:8000"
+
+    networks:
+      - raw-network
+
+    command: >
+      sh -c "
+          python3 manage.py collectstatic --noinput &&
+
+          python3 manage.py makemigrations --noinput && 
+
+          python3 manage.py migrate admin --database=users_db &&
+          python3 manage.py migrate sessions --database=users_db && 
+          python3 manage.py migrate admin_honeypot --database=users_db &&
+          python3 manage.py migrate users --database=users_db &&
+
+          python3 manage.py migrate core --database=search_db &&
+          python3 manage.py migrate feedback --database=feedback_db &&
+          python3 manage.py migrate crawler --database=crawler_db &&
+          python3 manage.py migrate analytics --database=analytics_db && 
+          python3 manage.py runserver 0.0.0.0:8000 && 
+          python3 manage.py search_index --rebuild -y
+      "
+
+volumes:
+  docker-postgresql-multiple-databases:
+  data:
+    
+networks:
+  raw-network:
+    driver: bridge

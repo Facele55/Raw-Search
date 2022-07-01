@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}
+    503
+{% endblock %}
+
+{% block content %}
+    {% include 'core/header.html' %}
+
+    <h1 class="bd">
+        <center>503 {% trans 'Service Unavailable' %}</center>
+    </h1>
+
+
+{% endblock %}

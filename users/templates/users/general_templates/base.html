@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static '/js/jquery-ui-1.12.1/jquery-ui.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static "/fontawesome/css/all.min.css" %}" />
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/assets2/css/style.css' %}">
+
+
+
+    <script type="application/javascript" src="{% static '/assets2/js/vendor-all.min.js' %}"></script>
+    <script type="application/javascript" src="{% static '/assets2/js/plugins/bootstrap.min.js' %}"></script>
+    <script type="application/javascript" src="{% static '/assets2/js/pcoded.min.js' %}"></script>
+
+        <!-- Apex Chart -->
+    <!-- custom-chart js -->
+    <script type="application/javascript" src="{% static '/assets2/js/pages/dashboard-main.js' %}"></script>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        {% block title %}
+
+        {% endblock %}
+    </title>
+        <meta charset="UTF-8">
+            <link rel="shortcut icon" href="#">
+
+
+    <!-- Specific CSS goes HERE -->
+    {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+<body class="">
+   <script>0</script>
+   <!-- rest of the code -->
+
+    <!-- [ Pre-loader ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <!-- [ Pre-loader ] End -->
+
+    {% block content %}{% endblock content %}
+
+
+    <!-- Specific Page JS goes HERE  -->
+    {% block javascripts %}{% endblock javascripts %}
+
+
+{%  comment %}
+{% include 'core/footer.html' %}
+{% endcomment %}
+
+
+</body>
+</html>
+
+
+

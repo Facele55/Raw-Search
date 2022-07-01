@@ -1,0 +1,65 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}{% trans 'Home Page' %}{% endblock %}
+{% block css %}
+    <style>
+        .jumbo_tron {
+            height: 38vh;
+            padding: 4em;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="content-header">
+        {% include 'core/choose_lang.html' %}
+    </div>
+
+    <div class="jumbo_tron bg-white">
+        <a href="{% url 'core:index' %}"><h1 class="display-1 text-center"><b> Raw Search</b></h1></a>
+    </div>
+    <div class="container p-1 wrapper">
+        {% url 'core:search' as action_path %}
+        {% include 'core/search/search_form.html' with action_path=action_path %}
+        <div class="jumbotron bg-white">
+            <div class="row justify-content-md-center" style="font-size: xx-large; flex-grow: 2;">
+                <div class="col col-md-auto">
+                    <span style="color: red">
+                        <i class="fa fa-times-circle"></i>
+                    </span>
+                    {% trans 'NO Ranking' %}
+                </div>
+                <div class="col col-md-auto">
+                    <span style=" color: red">
+                        <i class="fa fa-times-circle"></i>
+                    </span>
+                    {% trans 'NO ADS' %}
+                </div>
+                <div class="col col-md-auto">
+                    <span style=" color: red">
+                        <i class="fa fa-times-circle"></i>
+                    </span>{% trans 'NO SEO' %}
+                </div>
+                <div class="row justify-content-md-center" style="font-size: xx-large">
+                    <div class="col col-lg-auto">
+                        <span style=" color: green">
+                            <i class="fa fa-check-circle"></i>
+                        </span> {% trans 'ONLY ACTUAL RESULTS' %}
+                    </div>
+                </div>
+                <br>
+                <div class="row justify-content-md-center" style="font-size: xx-large">
+                    <div class="col col-lg-auto">
+                        <span style="color: green">
+                            <i class="fa fa-check-circle"></i>
+                        </span> {% trans 'The Best Performance' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

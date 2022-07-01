@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}
+    504
+{% endblock %}
+
+{% block content %}
+    {% include 'core/header.html' %}
+
+    <h1 class="bd">
+        <center>504 {% trans 'Gateway Timeout' %}</center>
+    </h1>
+
+{% endblock %}

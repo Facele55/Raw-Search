@@ -1,0 +1,142 @@
+{% extends "users/admin_templates/layouts/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Accounts List' %}   {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %} 
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6 float-sm-right">
+              <ol class="breadcrumb float-sm-left">
+                  <li class="breadcrumb-item"><a href="{% url 'users:index' %}"><i class="fas fa-home"></i></a></li>
+                  <li class="breadcrumb-item">{% trans 'Account Management' %}</li>
+                  <li class="breadcrumb-item active">{% trans 'Users' %}</li>
+              </ol>
+          </div>
+          <div class="col-sm-6">
+              <h5>{% trans 'Accounts List' %} </h5>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+            {% if messages %}
+                <div class="form-group">
+                    <div class="col-12">
+                        {% for message in messages %}
+                            {% if message.tags == "error" %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% elif message.tags == "success" %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+      <!-- Default box -->
+      <div class="card">
+          <div class="card-body table-responsive p-0">
+               <table class="table table-hover text-nowrap">
+                      <thead>
+                      <tr>
+                          <th>{% trans 'ID' %} </th>
+                          <th>{% trans 'First Name' %} </th>
+                          <th>{% trans 'Last Name' %} </th>
+                          <th>{% trans 'Username' %} </th>
+                          <th>{% trans 'Email' %} </th>
+                          <th>{% trans 'Action' %} </th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      {% for s in object_list %}
+                          <tr>
+                              <td>{{ s.id }}</td>
+                              <td>{{ s.first_name }}</td>
+                              <td>{{ s.last_name }}</td>
+                              <td>{{ s.username }}</td>
+                              <td>{{ s.email }}</td>
+                              <td>
+                                  <a href="{% url 'users:edit_user_perm' s.id %}" class="btn btn-success">{% trans 'Edit' %} </a>
+                                   <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-default-{{ s.id }}">
+                                       {% trans 'Details' %}
+                                   </button>
+                              </td>
+                          </tr>
+                                <div class="modal fade" id="modal-default-{{ s.id }}">
+                                    <div class="modal-dialog modal-dialog-scrollable">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h4 class="modal-title">{{ s.first_name }} {{ s.last_name }}</h4>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-inline">
+                                            <div class="">
+                                              <div class="form-group">
+                                                <label>{% trans 'First Name' %}</label>
+                                                  <input type="text" readonly class="form-control-plaintext"  value="{{ s.first_name }}">
+                                                <label >{% trans 'Last Name' %}</label>
+                                                  <input type="text" readonly class="form-control-plaintext"  value="{{ s.last_name }}">
+                                              </div>
+                                              <div class="form-group">
+                                                <label>{% trans 'Email' %}</label>
+                                                  <input type="text" readonly class="form-control-plaintext"  value="{{ s.email }}">
+                                              </div>
+                                              <div class="form-group">
+                                                  <label>{% trans 'Status' %}</label>
+                                                  <input type="text" readonly class="form-control-plaintext"  value="{{ s.get_status_display }}">
+                                                <label>{% trans 'User Type' %}</label>
+                                                  <input type="text" readonly class="form-control-plaintext"  value="{{ s.get_user_type_display }}">
+
+                                              </div>
+                                            </div>
+                                            <!-- /.card-body -->
+                                          </form>
+                                        </div>
+                                        <div class="modal-footer justify-content-between">
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
+                                        </div>
+                                      </div>
+                                      <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                  </div>
+                                  <!-- /.modal -->
+                      {% endfor %}
+                      </tbody>
+                  </table>
+          </div>
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+
+{% endblock javascripts %}

@@ -1,0 +1,114 @@
+{% extends "users/admin_templates/layouts/base.html" %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Queue' %}
+{% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6 float-sm-right">
+                        <ol class="breadcrumb float-sm-left">
+                            <li class="breadcrumb-item"><a href="{% url 'users:index' %}"><i
+                                    class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item active">{% trans 'Queue' %}</li>
+                        </ol>
+                    </div>
+                    <div class="col-sm-4">
+                        <h5>{% trans 'Queue' %}</h5>
+                    </div>
+                    <div class="col-sm-2 float-end">
+                        <a href="{% url 'users:add_to_q' %}">{% trans 'Add to queue' %}</a>
+                    </div>
+
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            {% if messages %}
+                <div class="form-group">
+                    <div class="col-12">
+                        {% for message in messages %}
+                            {% if message.tags == "error" %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                     style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% elif message.tags == "success" %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                     style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            <!-- Default box -->
+
+            <div class="card">
+
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                        <tr>
+                            <th>{% trans 'Site/Page' %} </th>
+                            <th>{% trans 'URL' %}</th>
+                            <th>{% trans 'Added by' %}</th>
+                            <th>{% trans 'Status' %}</th>
+                            <th>{% trans 'Action' %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for q in object_list %}
+                            <tr class="bg-gray-{% if q.status == 1 %}dark{% else %}light{% endif %}">
+                                <td>
+                                    {{ q.get_page_site_display }}
+                                </td>
+                                <td><a target="_blank" href="{{ q.url }}">{{ q.url|truncatechars:70 }}
+                                </a></td>
+
+                                <td>{{ q.get_added_by }}</td>
+                                <td>
+                                    {{ q.status }}
+                                </td>
+                                <td>
+                                    <a href="{% url 'crawler:delete_from_queue' q.id %}"
+                                       class="btn btn-danger">{% trans 'Delete' %} </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% if is_paginated %}
+            <div class="p-2">
+                    {% include 'users/admin_templates/includes/pagitation.html' %}
+                </div>
+            {% endif %}
+
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

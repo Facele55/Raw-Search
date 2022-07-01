@@ -1,0 +1,75 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% trans 'About Project' %}
+{% endblock %}
+
+{% block content %}
+
+{% include 'core/header.html' %}
+
+<h1 class="text-center text-info mb-3 mt-2">{% trans 'About Project' %}</h1>
+
+<h2>{% trans 'Topic:' %} <q>{% trans 'Design and implementation of a web search engine' %}</q> </h2>
+
+   <h4 class="text-center mt-sm-5"><strong>Abstract</strong></h4>
+
+<p class="lead container-sm">
+	<q>- Ohh, just google it!</q>
+
+        At this point, the word "google" had become a common noun. We live in the Big Data Era, in
+        which practically all information is accessible via the internet. We use search to locate any
+        query, no matter how simple. Google is now the most well-known search engine. Those who
+        value their privacy more than anything else may prefer DuckDuckGO over Google. However,
+        from time to time, each of those search engines gets caught by purchasing private data. I want
+        to be able to control and safeguard my personal information. It is essential that you secure
+        yourself from "bad eyes". That's why I’m implementing my own search engine.
+    <br><strong>Keywords:</strong> search engine, privacy, django
+</p>
+    <h4 class="text-center mt-sm-5"><strong>Introduction</strong></h4>
+
+    <p class="lead container-sm">
+    An online search engine is a data retrieval system that saves information from several
+websites. Since the advent of the World Wide Web, search engines have made important
+contributions to the search for information on the internet. They assist in swiftly accessing
+information on the internet. However, there are several ways to enhance it. Web search
+engines do not take into account the individual demands of users; instead, each user is treated
+similarly. It is becoming increasingly harder for an online search engine to determine what a
+user truly desires. When many users submit the same inquiry to a typical search engine, the
+results will be the same regardless of which user submitted the query. Users require
+information depending on their interests while searching for information on the web. It is
+tough to communicate to the search engine what we, the users, genuinely desire.
+        <br>
+    As the Web progresses at an alarmingly rapid pace, information expands at a dizzying rate.
+The volume of information on the internet is quickly increasing, as is the number of new users
+who are unfamiliar with the art of web research.
+        <br>
+    I've suggested a method in which the user enters content or picture search terms. If the
+algorithm identifies matching content or images, it will match the term. The system will show
+the user that material and image. The user may search for information more quickly. The
+system is user-friendly; any user may use it.
+    </p>
+
+    <h4 class="text-center mt-sm-5"><strong>Conclusion</strong></h4>
+<p class="lead container-sm">
+The <strong>Raw Search</strong>  project was finished successfully. The system was created with great care and
+is error-free, while also being efficient and time-saving. The goal of this project was to create
+a web application that could search for data throughout the whole internet. Search engines
+help in finding information on the web as quickly as possible. But still, there are certain ways
+to improve it. This project provided me with useful information and practical expertise on a
+variety of topics, including creating web pages in HTML, CSS, and Python; using responsive
+templates; developing a full-stack Django application; and database administration in SQLite3
+and PostgreSQL. The entire system has been safeguarded. In addition, the project helped me
+comprehend project development phases and the software development life cycle. I learned
+how to test many components of a project. This project has given me a lot of happiness
+because I was able to create an application that can be used to help people. However,
+designing to implement an application utilizing a new technology was extremely difficult. It is
+difficult to let the search engine know what the user actually wants.
+
+</p>
+
+
+
+{% endblock %}

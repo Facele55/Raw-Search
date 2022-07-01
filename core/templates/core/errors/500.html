@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}
+    500
+
+{% endblock %}
+
+{% block content %}
+    {% include 'core/header.html' %}
+
+    <h1 class="bd">
+        <center>500 {% trans 'Internal Server Error' %}</center>
+    </h1>
+
+{% endblock %}

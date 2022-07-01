@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'js/jquery-ui-1.12.1/jquery-ui.css' %}">
+
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}" />
+    <link rel="stylesheet" href="{% static 'users/css/style.css' %}">
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'users/plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="{% static 'users/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{% static 'users/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="{% static 'users/plugins/jqvmap/jqvmap.min.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'users/css/adminlte.min.css' %}">  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{% static 'users/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{% static 'users/plugins/daterangepicker/daterangepicker.css' %}">
+  <!-- summernote -->
+  <link rel="stylesheet" href="{% static 'users/plugins/summernote/summernote-bs4.min.css' %}">
+
+    <!--[if lt IE 10]>
+    <script type="application/javascript" src="{% static 'assets2/html5shiv.js' %}"></script>
+    <script type="application/javascript" src="{% static 'assets2/respond.min.js' %} "></script>
+        <![endif]-->
+    <!-- Meta -->
+
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+
+
+    <!-- Specific CSS goes HERE -->
+    {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+
+<body class="hold-transition {% block body_class %}{% endblock body_class %}">
+<div class="wrapper">
+
+    {% if user.user_type == '1' %}
+        {% include 'users/admin_templates/includes/navigation.html' %}
+        {% include 'users/admin_templates/includes/sidebar.html' %}
+    {% elif user.user_type == '2' %}
+        {% include 'users/staff_template/includes/navigation.html' %}
+        {% include 'users/staff_template/includes/sidebar.html' %}
+    {% elif user.user_type == '3' %}
+        {% include 'users/develop_template/includes/navigation.html' %}
+        {% include 'users/develop_template/includes/sidebar.html' %}
+    {% else %}
+        {% include 'users/user_template/includes/navigation.html' %}
+        {% include 'users/user_template/includes/sidebar.html' %}
+    {% endif %}
+
+
+    {% block content %}{% endblock content %}
+
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+
+</div>
+<!-- ./wrapper -->
+    {% include 'users/admin_templates/includes/scripts.html' %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+{% endblock javascripts %}
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+{% extends  'core/base.html' %}
+{% load humanize %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Search Etc' %}
+{% endblock %}
+
+{% block content %}
+    {% include 'core/header.html' %}
+
+
+    {% url 'core:search_etc' as action_path %}
+    <div class="container-fluid p-2 ">
+        {% include 'core/search/search_form.html' with action_path=action_path %}
+    </div>
+
+
+    <div id="content" class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+
+                {% if request.GET.q != '' or request.GET.q == None %}
+
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+                        <li class="nav-item" role="presentation">
+
+                            <form action="{% url 'core:search' %} ">
+                                <input style="display: none" type="text" name="q" value="{{ query }}">
+                                <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                                        type="submit" role="tab" aria-controls="home"
+                                        aria-selected="false">{% trans 'All' %} </button>
+                            </form>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            {% comment %}
+  {% endcomment %}
+
+                            <form action="{% url 'core:search_img' %} ">
+                                <input style="display: none" type="text" name="q" value="{{ query }}">
+                                <button class="nav-link " id="profile-tab" data-bs-toggle="tab"
+                                        data-bs-target="#profile" type="submit" role="tab" aria-controls="profile"
+                                        aria-selected="false">{% trans 'Images' %} </button>
+                            </form>
+
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <form action="{% url 'core:search_etc' %} ">
+                                <input style="display: none" type="text" name="q" value="{{ query }}">
+                                <button class="nav-link active" id="contact-tab" data-bs-toggle="tab"
+                                        data-bs-target="#contact" type="submit" role="tab" aria-controls="contact"
+                                        aria-selected="true">{% trans 'Others' %} </button>
+                            </form>
+
+                        </li>
+                        <hr class="nomargin-bottom margin-top-10">
+
+                    </ul>
+
+                    {% comment %} {% endcomment %}
+
+                    <div class="tab-content" id="myTabContent">
+
+                        <div class="tab-pane fade show active" id="contact" role="tabpanel"
+                             aria-labelledby="contact-tab">
+                            {% include 'core/search/etc.html' %}
+                        </div>
+
+                    </div>
+                    <p class="float-end"><a href="#"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a></p>
+
+
+
+                {% else %}
+                    <h2 class="bd">{% trans 'Empty query' %}</h2>
+
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $("#myTab a").click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+        });
+    </script
+{% endblock %}

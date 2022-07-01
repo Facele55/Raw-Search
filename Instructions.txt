@@ -1,0 +1,66 @@
+Create virtual Enviroment:
+    for Linux/Unix: python3 -m venv venv
+    for Windows: python -m venv venv
+
+Activate:
+    For Linux/Unix: . venv/bin/activate 
+    For Win: venv\Scripts\activate
+
+Install requirements
+    For Linux/Unix: pip3 install -r requirements.txt
+    For Win: pip install -r requirements.txt
+
+
+Basic commands:
+There is difference between different OS's
+
+        base_command for Linux/Unix: python3 manage.py
+
+        base_command for Windows: python manage.py
+
+
+Makemigrations:
+base_command makemigrations
+
+-//- for specific application:
+base_command makemigrations app_name
+
+Migrate for specific application and database:
+
+Core (search) - base_command migrate core --database=search_db
+Feedback - base_command migrate feedback --database=feedback_db
+Crawler - base_command migrate crawler --database=crawler_db
+
+Analytics - base_command migrate analytics --database=analytics_db
+
+Users - base_command migrate users --database=users_db
+    Additional commands for App "Users":
+
+    base_command migrate admin --database=users_db
+    base_command migrate sessions --database=users_db
+    base_command migrate admin_honeypot --database=users_db
+
+
+Internationalization and localization
+
+django-admin makemessages -a  --ignore  venv
+* --ignore virtual enviroment
+
+django-admin compilemessages
+
+
+Elasticsearch update/rebuild indexes
+base_command search_index --rebuild
+
+Commands for Linux/Unix
+
+Elasticsearch
+-//- check status:
+sudo systemctl status elasticsearch.service
+-//- start:
+sudo systemctl start elasticsearch.service
+-//- stop:
+sudo systemctl stop elasticsearch.service
+
+Print tree:
+    tree -L 2

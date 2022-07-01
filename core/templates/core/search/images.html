@@ -1,0 +1,108 @@
+{% load humanize %}
+{% load i18n %}
+
+{% block css %}
+    <style>
+        .row > .column {
+            padding: 0 8px;
+        }
+        .row:after {
+            content: ""; display: table; clear: both;
+        }
+        .cursor {cursor: pointer;
+        }
+        img {
+            margin-bottom: -4px;
+        }
+        img.hover-shadow {transition: 0.3s;
+        }
+        .hover-shadow:hover {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+.zoom {
+  padding: 50px;
+  transition: transform .2s;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.zoom:hover {
+    background-color: white;
+  -ms-transform: scale(2); /* IE 9 */
+  -webkit-transform: scale(2); /* Safari 3-8 */
+  transform: scale(2);
+}
+
+    </style>
+{% endblock %}
+{% block content %}
+    {% if results %}
+        <h6 class="nomargin">
+            {% trans 'About' %} {{ count|intcomma }}
+            {% blocktrans count counter=0 %}result{% plural %}results{% endblocktrans %}
+            {% trans 'for' %}
+            <b>{{ query }}</b> {% trans 'in' %}
+            <small class="text-success">{{ total|floatformat:"7g" }} {% trans 'sec' %} </small>
+        </h6>
+        <div class="container-lg">
+            <div class="row">
+                <div class="card-columns" >
+                    {% for result in object_list %}
+                        <div class="card">
+                            <img class="hover-shadow cursor card-img-top" src="{{ result.img_url }}" alt="{{ result.img_alt }}">
+                            <div class="card-body ">
+                                <a target="_blank" rel="nofollow" href="{{ result.img_url }}" style="width: {{ result.img_url }}">
+                                    <h5 class="text-success">{{ result.img_alt }}</h5></a>
+                                <p class="card-text">
+                                    {{ result.headline_img|safe }}
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <p class="float-end"><a href="#"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a></p>
+        {% if count >= 10 %}
+            {% include 'core/search/pagitation.html' %}
+        {% endif %}
+    {% else %}
+            <h2 class="bd">{% trans 'No Results Found' %}</h2>
+
+    {% endif %}
+{% endblock %}
+
+{% block js %}
+    <script>
+        $.ajax({
+            url: "{% url 'users:elasticsearch_status' %}",
+            type: "GET",
+            timeout: 1000,
+            // cors
+            statusCode: {
+                200: function (response) {
+                    if (response.status === 'inactive') {
+                        // console.log('Inactive');
+                        window.location.replace("{% url 'core:503' %}");
+                    } else {
+                        //window.location.replace("{% url 'core:503' %}");
+                        //  console.log(response.status);
+                    }
+
+                    //alert('Working!');
+                },
+                400: function (response) {
+                    console.log("400", response.status);
+                    //alert('Not working!');
+                    window.location.replace("{% url 'core:404' %}");
+                },
+                0: function (response) {
+                    //console.log("0", response.status);
+                    //alert('Not working!');
+                }
+            }
+        });
+
+    </script>
+{% endblock %}

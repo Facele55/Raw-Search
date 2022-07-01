@@ -1,0 +1,66 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+{% trans 'Feedback' %}
+{% endblock %}
+
+{% block content %}
+{% include 'core/header.html' %}
+
+    <div class="container">
+    <div class="row">
+        <h1>{% trans 'Help us improve searches like this' %}.
+        </h1>
+        <p class="text-dark">{% trans 'Leave your feedback here' %}</p>
+        <div class="d-flex  justify-content-lg-start">
+                <form class="form-floating mb-3" action="{% url 'feedback:form' %}" method="POST" role="form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% comment %} Display Messages {% endcomment %}
+                                {% if messages %}
+                                <div class="form-group">
+                                <div class="col-12">
+                                    {% for message in messages %}
+                                    {% if message.tags == "error" %}
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% elif message.tags == "success" %}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </div>
+                                {% endif %}
+                        <div class="card-body">
+                            {% comment %} Adding Form with All inputs Here{% endcomment %}
+                            {% for field in form %}
+                                <div class="inline-group">
+                                    {{ field.errors }}
+                                    {{ field.label_tag }}
+                                    {{ field }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    <button type="submit" class="btn btn-outline-success ms-3">{% trans 'Submit' %}</button>
+                </form>
+
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
+{% block js %}
+    <script>
+
+    </script>
+{% endblock %}

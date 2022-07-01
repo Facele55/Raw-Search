@@ -1,0 +1,232 @@
+{% load static %}
+{% load i18n %}
+
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-light-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{% url 'core:index' %}" class="brand-link text-center">
+        <span class="brand-text font-weight-light">Raw Search</span>
+    </a>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="{% static 'users/img/avatar5.png' %}" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="{% url 'users:user_profile' %}" class="d-block">
+                    {{ request.user }}
+                </a>
+            </div>
+        </div>
+        <!-- SidebarSearch Form -->
+        <div class="form-inline">
+            <div class="input-group" data-widget="sidebar-search">
+                <input class="form-control form-control-sidebar" style="display: none" type="search"
+                       placeholder="Search" aria-label="Search">
+                <!-- Dont remove, Without form dropdown not working -->
+            </div>
+        </div>
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+                <li class="nav-header">{% trans 'NAVIGATION' %}</li>
+                {% url 'users:admin_home' as user_index %}
+                {% url 'admin:index' as admin_index %}
+
+                <li class="nav-item has-treeview {% if request.path == user_index or request.path == admin_index %} menu-open {% endif %}">
+                    <a href="#" class="nav-link {% if request.path == user_index %} active {% endif %}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            {% trans 'Dashboard' %}
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ user_index }}"
+                               class="ml-2 nav-link {% if request.path == user_index %} bg-gradient-dark text-light {% endif %}">
+                                <i class="fas fa-user"></i>
+                                <p>{% trans 'Home' %}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ admin_index }}"
+                               class="ml-2 nav-link {% if request.path == admin_index %} bg-gradient-dark text-light {% endif %}">
+                                <i class="fas fa-user"></i>
+                                <p>{% trans 'Admin Dashboard' %}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-header">{% trans 'SERVICES' %}</li>
+                {% url 'users:manage_users' as users %}
+                {% url 'users:account_dashboard' as acc_dash %}
+                <li class="nav-item has-treeview {% if request.path == users or request.path == acc_dash %} menu-open bg-gradient-white mb-3 {% endif %}">
+                    <a href="#"
+                       class="nav-link {% if request.path == users or request.path == acc_dash %} active {% endif %}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            {% trans 'Account management' %}
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="ml-2 nav-item">
+                            <a href="{{ acc_dash }}"
+                               class="nav-link {% if request.path == acc_dash %} bg-gradient-dark text-light {% endif %}">
+                                <i class="fa fa-chalkboard"></i>
+                                <p>{% trans 'Account Dashboard' %}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ users }}"
+                               class="ml-2 nav-link {% if request.path == users %} bg-gradient-dark text-light {% endif %}">
+                                <i class="fas fa-user"></i>
+                                <p>{% trans 'Accounts List' %}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="nav-item">
+                    {% url 'users:search_to_autocomplete' as autocomplete %}
+                    <a href="{{ autocomplete }}"
+                       class="nav-link {% if request.path == autocomplete %} bg-gradient-info text-light{% endif %}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            {% trans 'Autocomplete Search' %}
+                        </p>
+                    </a>
+                </li>
+                {% url 'users:feeds' as feedback %}
+                {% url 'users:support_table' as support %}
+                {% url 'users:contact_table' as contact %}
+                <li class="nav-item has-treeview {% if request.path == feedback or request.path == support or request.path == contact %} menu-open bg-gradient-white mb-3 {% endif %}">
+                    <a href="#"
+                       class="nav-link {% if request.path == feedback or request.path == support or request.path == contact %} active {% endif %}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            {% trans 'Entries' %}
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                    <a href="{{ feedback }}"
+                       class="ml-2 nav-link {% if request.path == feedback %} bg-gradient-dark text-light{% endif %}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            {% trans 'Feedback' %}
+                        </p>
+                    </a>
+                </li>
+                        <li class="nav-item">
+
+                    <a href="{{ support }}"
+                       class="ml-2 nav-link {% if request.path == support %} bg-gradient-dark text-light{% endif %}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            {% trans 'Support' %}
+                        </p>
+                    </a>
+                </li>
+                        <li class="nav-item">
+
+                    <a href="{{ contact }}"
+                       class="ml-2 nav-link {% if request.path == contact %} bg-gradient-dark text-light{% endif %}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            {% trans 'Contact' %}
+                        </p>
+                    </a>
+                </li>
+
+                    </ul>
+                </li>
+
+
+                <li class="nav-item">
+                    {% url 'users:problems' as problems %}
+                    <a href="{{ problems }}"
+                       class="nav-link {% if request.path == problems %}bg-gradient-info text-light{% endif %}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            {% trans 'Problems' %}
+                        </p>
+                    </a>
+                </li>
+                {% url 'users:queue' as queue %}
+                {% url 'users:table_to_crawl_sites' as sites %}
+                {% url 'users:table_to_crawl_pages' as pages %}
+                {% url 'users:crawler_dashboard' as cr_dash %}
+                <li class="nav-item has-treeview {% if request.path == queue or request.path == sites or request.path == pages or request.path == cr_dash %} menu-open {% endif %}">
+                    <a href="#"
+                       class="nav-link {% if request.path == queue or request.path == sites or request.path == pages or request.path == cr_dash %} active {% endif %}">
+                        <i class="nav-icon fas fa-crow"></i>
+                        <p>
+                            {% trans 'Crawler' %}
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ cr_dash }}"
+                               class="ml-2 nav-link {% if request.path == cr_dash %} bg-gradient-dark text-light {% endif %}">
+                                <i class="fa fa-chalkboard"></i>
+                                <p>{% trans 'Crawler Dashboard' %}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ queue }}"
+                               class="ml-2 nav-link {% if request.path == queue %} bg-gradient-dark text-light {% endif %}">
+                                <i class="fas fas fa-spider"></i>
+                                <p>{% trans 'Queue' %}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ sites }}"
+                               class="ml-2 nav-link {% if request.path == sites %} bg-gradient-dark text-light {% endif %}">
+                                <i class="fas fa-spider"></i>
+                                <p>{% trans 'Sites' %}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ pages }}"
+                               class="ml-2 nav-link {% if request.path == pages %} bg-gradient-dark text-light {% endif %}">
+                                <i class="fas fa-spider"></i>
+                                <p>{% trans 'Pages' %}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-header">{% trans 'BACKUP' %}</li>
+                <li class="nav-item">
+                    {% url 'users:backups_table' as backups %}
+                    <a href="{{ backups }}"
+                       class="nav-link {% if request.path == backups %}bg-gradient-info text-light{% endif %}">
+                        <i class="nav-icon fas fa-database"></i>
+                        <p>{% trans 'Manage Backups' %}</p>
+                    </a>
+                </li>
+                <li class="nav-header">{% trans 'Action Zone' %}</li>
+                <li class="nav-item">
+                    <a href="{% url 'users:logout' %}" class="nav-link">
+                        <i class="nav-icon fa fa-sign-out-alt"></i>
+                        <p>
+                            {% trans 'Log Out' %}
+                        </p>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
+  

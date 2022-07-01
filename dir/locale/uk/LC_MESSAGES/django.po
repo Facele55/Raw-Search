@@ -1,0 +1,1155 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-01 13:57+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
+"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
+"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
+"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+#: backups/templates/backups/backups.html:5
+#: backups/templates/backups/backups.html:23
+msgid "Backups"
+msgstr "Резервні копії"
+
+#: backups/templates/backups/backups.html:27
+msgid "Backup Details"
+msgstr "Деталі резервної копії"
+
+#: backups/templates/backups/backups.html:66
+msgid "Application"
+msgstr "Додаток"
+
+#: backups/templates/backups/backups.html:67
+#: users/templates/users/admin_templates/confirm_autocomplete.html:90
+#: users/templates/users/admin_templates/crawl_queue.html:74
+#: users/templates/users/admin_templates/manage_users_template.html:65
+#: users/templates/users/admin_templates/problem_table.html:78
+#: users/templates/users/admin_templates/supports_table.html:68
+#: users/templates/users/admin_templates/table_to_crawl_pages.html:67
+#: users/templates/users/admin_templates/table_to_crawl_sites.html:68
+msgid "Action"
+msgstr "Дія"
+
+#: backups/templates/backups/backups.html:72
+msgid "All databases"
+msgstr "Усі бази даних"
+
+#: backups/templates/backups/backups.html:76
+msgid "Backup of all the databases"
+msgstr "Резервна копія всіх баз даних"
+
+#: backups/templates/backups/backups.html:82
+#: users/templates/users/admin_templates/index.html:160
+msgid "Core"
+msgstr "Core"
+
+#: backups/templates/backups/backups.html:84
+#: backups/templates/backups/backups.html:90
+#: backups/templates/backups/backups.html:96
+#: backups/templates/backups/backups.html:102
+#: backups/templates/backups/backups.html:110
+msgid "Do backup"
+msgstr "Зробити резервне копіювання"
+
+#: backups/views.py:17
+msgid "All DBes were successfully backed up."
+msgstr "Усі БД були успішно створені."
+
+#: backups/views.py:21 backups/views.py:42 backups/views.py:53
+#: backups/views.py:64 backups/views.py:75 backups/views.py:86
+#: feedback/views.py:75 feedback/views.py:87 users/AdminView.py:237
+#: users/AdminView.py:253 users/AdminView.py:264 users/AdminView.py:275
+#: users/views.py:121
+msgid "Error: "
+msgstr "Помилка: "
+
+#: backups/views.py:37
+msgid "The Feedback DB was successfully backed up."
+msgstr "База даних Feedback була успішно створена."
+
+#: backups/views.py:49
+msgid "The Users DB was successfully backed up."
+msgstr "Резервну копію БД Users було успішно створено."
+
+#: backups/views.py:60
+msgid "The Core DB was successfully backed up."
+msgstr "Резервну копію Core БД успішно створено."
+
+#: backups/views.py:71
+msgid "The Analytics DB was successfully backed up."
+msgstr "БД Analytics успішно створено резервну копію."
+
+#: backups/views.py:82
+msgid "The Crawler DB was successfully backed up."
+msgstr "Бада даних Crawler була успішно створена."
+
+#: core/models.py:8 feedback/models.py:11 feedback/models.py:15
+#: users/templates/users/admin_templates/index.html:90
+#: users/templates/users/admin_templates/index.html:112
+msgid "Pending"
+msgstr "Очікує"
+
+#: core/models.py:9 users/AdminView.py:262
+#: users/templates/users/admin_templates/index.html:118
+msgid "Approved"
+msgstr "Затверджено"
+
+#: core/models.py:10 users/AdminView.py:273
+#: users/templates/users/admin_templates/index.html:122
+msgid "Rejected"
+msgstr "Відхилено"
+
+#: core/models.py:115 feedback/models.py:67 feedback/models.py:87
+#: users/templates/users/admin_templates/confirm_autocomplete.html:88
+#: users/templates/users/admin_templates/contact_entries.html:63
+#: users/templates/users/admin_templates/problem_table.html:75
+msgid "Name"
+msgstr "Ім'я"
+
+#: core/models.py:116 feedback/models.py:46 feedback/models.py:69
+#: users/forms.py:74 users/models.py:21
+#: users/templates/users/admin_templates/confirm_autocomplete.html:89
+#: users/templates/users/admin_templates/crawl_queue.html:73
+#: users/templates/users/admin_templates/manage_users_template.html:106
+#: users/templates/users/admin_templates/problem_table.html:77
+#: users/templates/users/admin_templates/problem_table.html:108
+#: users/templates/users/admin_templates/supports_table.html:66
+msgid "Status"
+msgstr "Статус"
+
+#: core/templates/core/about.html:6 core/templates/core/about.html:13
+#: core/templates/core/base.html:53
+msgid "About Project"
+msgstr "Про проект"
+
+#: core/templates/core/about.html:15
+msgid "Topic:"
+msgstr "Тема:"
+
+#: core/templates/core/about.html:15
+msgid "Design and implementation of a web search engine"
+msgstr "Проектування та реалізація веб-пошукової системи"
+
+#: core/templates/core/base.html:43
+#: users/templates/users/admin_templates/includes/navigation.html:10
+#: users/templates/users/admin_templates/includes/sidebar.html:53
+#: users/templates/users/develop_template/includes/navigation.html:10
+#: users/templates/users/develop_template/includes/sidebar.html:42
+#: users/templates/users/develop_template/index.html:21
+#: users/templates/users/staff_template/includes/navigation.html:10
+#: users/templates/users/staff_template/includes/sidebar.html:42
+#: users/templates/users/staff_template/index.html:21
+#: users/templates/users/user_template/includes/navigation.html:10
+#: users/templates/users/user_template/includes/sidebar.html:42
+#: users/templates/users/user_template/index.html:21
+msgid "Home"
+msgstr "Дім"
+
+#: core/templates/core/base.html:45
+#: core/templates/core/search/search_form.html:15
+#: core/templates/core/search/serp_all.html:5
+msgid "Search"
+msgstr "Пошук"
+
+#: core/templates/core/base.html:47 core/templates/core/docs.html:12
+msgid "Documentation"
+msgstr "Документація"
+
+#: core/templates/core/base.html:49 core/templates/core/privacy_policy.html:6
+#: core/templates/core/privacy_policy.html:14
+msgid "Privacy Policy"
+msgstr "Політика конфіденційності"
+
+#: core/templates/core/base.html:51
+#: feedback/templates/feedback/feedback_form.html:6
+#: users/templates/users/admin_templates/feedbacks.html:21
+#: users/templates/users/admin_templates/includes/sidebar.html:124
+#: users/templates/users/admin_templates/index.html:135
+#: users/templates/users/admin_templates/index.html:147
+msgid "Feedback"
+msgstr "Зворотній зв'язок"
+
+#: core/templates/core/base.html:55
+#: feedback/templates/feedback/contact_form.html:6
+#: users/templates/users/admin_templates/contact_entries.html:5
+#: users/templates/users/admin_templates/contact_entries.html:21
+#: users/templates/users/admin_templates/includes/sidebar.html:144
+msgid "Contact"
+msgstr "Контакт"
+
+#: core/templates/core/base.html:57
+msgid "User Profile"
+msgstr "Профіль користувача"
+
+#: core/templates/core/base.html:60
+#: users/templates/users/admin_templates/includes/sidebar.html:60
+msgid "Admin Dashboard"
+msgstr "Панель адміністратора"
+
+#: core/templates/core/base.html:63 crawler/templates/crawler/crawler.html:5
+#: users/templates/users/admin_templates/add_to_queue.html:22
+#: users/templates/users/admin_templates/crawler_dashboard.html:17
+#: users/templates/users/admin_templates/crawler_dashboard.html:22
+#: users/templates/users/admin_templates/crawler_dashboard.html:60
+#: users/templates/users/admin_templates/includes/sidebar.html:172
+#: users/templates/users/admin_templates/table_to_crawl_pages.html:20
+#: users/templates/users/admin_templates/table_to_crawl_sites.html:19
+msgid "Crawler"
+msgstr "Сканер"
+
+#: core/templates/core/base.html:68
+msgid "Version"
+msgstr "Версія"
+
+#: core/templates/core/docs.html:6
+msgid "Docs"
+msgstr "Доки"
+
+#: core/templates/core/errors/403.html:14
+msgid "Forbidden"
+msgstr "Заборонено"
+
+#: core/templates/core/errors/404.html:15
+msgid "Not Found"
+msgstr "Не знайдено"
+
+#: core/templates/core/errors/500.html:15
+msgid "Internal Server Error"
+msgstr "Внутрішня помилка сервера"
+
+#: core/templates/core/errors/502.html:15
+msgid "Bad Gateway"
+msgstr "Невірний шлюз"
+
+#: core/templates/core/errors/503.html:14
+msgid "Service Unavailable"
+msgstr "Послуга недоступна"
+
+#: core/templates/core/errors/504.html:14
+msgid "Gateway Timeout"
+msgstr "Закінчився час очікування шлюзу"
+
+#: core/templates/core/errors/maintenance.html:4
+#: core/templates/core/errors/maintenance.html:10
+msgid "Temporary Maintenance"
+msgstr "Тимчасове технічне обслуговування"
+
+#: core/templates/core/index.html:6
+msgid "Home Page"
+msgstr "Домашня Сторінка"
+
+#: core/templates/core/index.html:33
+msgid "NO Ranking"
+msgstr "БЕЗ Рейтингу"
+
+#: core/templates/core/index.html:39
+msgid "NO ADS"
+msgstr "БЕЗ Реклами"
+
+#: core/templates/core/index.html:44
+msgid "NO SEO"
+msgstr "БЕЗ Пошукової оптимізації"
+
+#: core/templates/core/index.html:50
+msgid "ONLY ACTUAL RESULTS"
+msgstr "ТІЛЬКИ ПРАВДИВІ РЕЗУЛЬТАТИ"
+
+#: core/templates/core/index.html:58
+msgid "The Best Performance"
+msgstr "Найкраща Продуктивність"
+
+#: core/templates/core/search/etc.html:8
+#: core/templates/core/search/images.html:42
+#: core/templates/core/search/search.html:8
+msgid "About"
+msgstr "Близько"
+
+#: core/templates/core/search/etc.html:9
+#: core/templates/core/search/images.html:43
+#: core/templates/core/search/search.html:9
+msgid "result"
+msgid_plural "results"
+msgstr[0] "результат"
+msgstr[1] "результати"
+msgstr[2] "результатів"
+msgstr[3] "результатів"
+
+#: core/templates/core/search/etc.html:10
+#: core/templates/core/search/images.html:44
+#: core/templates/core/search/search.html:10
+msgid "for"
+msgstr "для"
+
+#: core/templates/core/search/etc.html:12
+#: core/templates/core/search/images.html:45
+#: core/templates/core/search/search.html:11
+msgid "in"
+msgstr "за"
+
+#: core/templates/core/search/etc.html:13
+#: core/templates/core/search/images.html:46
+#: core/templates/core/search/search.html:12
+msgid "sec"
+msgstr "сек"
+
+#: core/templates/core/search/etc.html:39
+#: core/templates/core/search/images.html:71
+#: core/templates/core/search/search.html:52
+msgid "No Results Found"
+msgstr "Результатів не знайдено"
+
+#: core/templates/core/search/search_form.html:11
+msgid "Start searching"
+msgstr "Почати пошук"
+
+#: core/templates/core/search/serp_all.html:23
+#: core/templates/core/search/serp_etc.html:35
+#: core/templates/core/search/serp_images.html:28
+msgid "All"
+msgstr "Усе"
+
+#: core/templates/core/search/serp_all.html:30
+#: core/templates/core/search/serp_etc.html:47
+#: core/templates/core/search/serp_images.html:37
+#: users/templates/users/admin_templates/index.html:176
+msgid "Images"
+msgstr "Зображення"
+
+#: core/templates/core/search/serp_all.html:37
+#: core/templates/core/search/serp_etc.html:56
+#: core/templates/core/search/serp_images.html:46
+msgid "Others"
+msgstr "Інше"
+
+#: core/templates/core/search/serp_all.html:49
+#: core/templates/core/search/serp_etc.html:80
+#: core/templates/core/search/serp_images.html:60
+msgid "Empty query"
+msgstr "Порожній запит"
+
+#: core/templates/core/search/serp_etc.html:6
+msgid "Search Etc"
+msgstr "Пошук Іншого"
+
+#: core/templates/core/search/serp_images.html:6
+msgid "Search Images"
+msgstr "Пошук Зображень"
+
+#: crawler/forms.py:17
+msgid "Type here address for crawling..."
+msgstr "Введіть тут адресу для сканування..."
+
+#: crawler/models.py:58 crawler/templates/crawler/crawler.html:19
+msgid "Page"
+msgstr "Сторінка"
+
+#: crawler/models.py:59 crawler/templates/crawler/crawler.html:14
+msgid "Site"
+msgstr "Сайт"
+
+#: crawler/templates/crawler/crawler.html:29
+msgid "Add website for crawling"
+msgstr "Додати веб-сайт для сканування"
+
+#: crawler/templates/crawler/crawler.html:70
+#: crawler/templates/crawler/crawler.html:123
+msgid "Add to Crawl"
+msgstr "Додати до сканування"
+
+#: crawler/templates/crawler/crawler.html:83
+msgid "Add webpage for crawling"
+msgstr "Додати веб-сторінку для сканування"
+
+#: crawler/templates/crawler/crawler.html:156
+msgid "This URL Already Exist"
+msgstr "Ця URL-адреса вже існує"
+
+#: crawler/templates/crawler/crawler.html:159
+msgid "This URL is new"
+msgstr "Ця URL-адреса нова"
+
+#: crawler/views.py:31
+msgid "Thank You! "
+msgstr "Дякуємо! "
+
+#: crawler/views.py:31
+msgid "The URL address "
+msgstr "URL-адреса "
+
+#: crawler/views.py:31
+msgid " will be crawled soon"
+msgstr " незабаром буде відсканована"
+
+#: crawler/views.py:40 crawler/views.py:50 crawler/views.py:61
+#: crawler/views.py:72
+msgid "Deleted"
+msgstr "Видалено"
+
+#: feedback/forms.py:12 users/templates/users/admin_templates/feedbacks.html:63
+msgid "Results was helpful"
+msgstr "Результати були корисними"
+
+#: feedback/forms.py:13 users/templates/users/admin_templates/feedbacks.html:64
+msgid "Information is outdated"
+msgstr "Інформація застаріла"
+
+#: feedback/forms.py:14 users/templates/users/admin_templates/feedbacks.html:65
+msgid "Information is missing"
+msgstr "Відсутня інформація"
+
+#: feedback/forms.py:15 users/templates/users/admin_templates/feedbacks.html:66
+msgid "Other"
+msgstr "Інше"
+
+#: feedback/forms.py:46 feedback/models.py:44 feedback/models.py:89
+#: users/templates/users/admin_templates/contact_entries.html:65
+#: users/templates/users/admin_templates/supports_table.html:64
+msgid "Subject"
+msgstr "Тема"
+
+#: feedback/forms.py:46 feedback/models.py:45 feedback/models.py:90
+#: users/templates/users/admin_templates/contact_entries.html:66
+#: users/templates/users/admin_templates/supports_table.html:65
+msgid "Message"
+msgstr "Повідомлення"
+
+#: feedback/forms.py:50 feedback/forms.py:77
+msgid "This subject is too long."
+msgstr "Ця тема задовга."
+
+#: feedback/forms.py:51 feedback/forms.py:54 feedback/forms.py:78
+#: feedback/forms.py:81 feedback/forms.py:84 feedback/forms.py:88
+msgid "This field is required"
+msgstr "Це поле є обов'язковим"
+
+#: feedback/forms.py:87
+msgid "Name is too long."
+msgstr "Ім'я задовге."
+
+#: feedback/models.py:7
+msgid "YES"
+msgstr "ТАК"
+
+#: feedback/models.py:8
+msgid "NO"
+msgstr "НІ"
+
+#: feedback/models.py:12 feedback/views.py:72 feedback/views.py:84
+#: users/templates/users/admin_templates/index.html:94
+msgid "Solved"
+msgstr "Вирішено"
+
+#: feedback/models.py:16
+msgid "Seen"
+msgstr "Побачено"
+
+#: feedback/models.py:43
+#: users/templates/users/admin_templates/supports_table.html:63
+msgid "User"
+msgstr "Користувач"
+
+#: feedback/models.py:68
+#: users/templates/users/admin_templates/problem_table.html:76
+#: users/templates/users/admin_templates/problem_table.html:112
+msgid "Error"
+msgstr "Помилка"
+
+#: feedback/models.py:88 users/forms.py:37 users/forms.py:72
+#: users/templates/users/admin_templates/contact_entries.html:64
+#: users/templates/users/admin_templates/manage_users_template.html:64
+#: users/templates/users/admin_templates/manage_users_template.html:102
+#: users/templates/users/general_templates/profile.html:106
+#: users/templates/users/login/auth-signin.html:23
+msgid "Email"
+msgstr "Електронна пошта"
+
+#: feedback/templates/feedback/contact_form.html:14
+msgid "Contact Us"
+msgstr "Зв'яжіться з нами"
+
+#: feedback/templates/feedback/contact_form.html:57
+msgid "Send Message"
+msgstr "Відправити повідомлення"
+
+#: feedback/templates/feedback/feedback_form.html:14
+msgid "Help us improve searches like this"
+msgstr "Допоможіть нам покращити пошукові запити"
+
+#: feedback/templates/feedback/feedback_form.html:16
+msgid "Leave your feedback here"
+msgstr "Залиште свій відгук тут"
+
+#: feedback/templates/feedback/feedback_form.html:56
+msgid "Submit"
+msgstr "Надіслати"
+
+#: feedback/templates/feedback/support_form.html:5
+#: feedback/templates/feedback/support_form.html:22
+#: feedback/templates/feedback/support_form.html:26
+#: users/templates/users/admin_templates/includes/sidebar.html:134
+#: users/templates/users/admin_templates/index.html:141
+#: users/templates/users/admin_templates/index.html:218
+#: users/templates/users/admin_templates/supports_table.html:5
+#: users/templates/users/admin_templates/supports_table.html:21
+#: users/templates/users/develop_template/includes/sidebar.html:50
+#: users/templates/users/staff_template/includes/sidebar.html:50
+#: users/templates/users/user_template/includes/sidebar.html:50
+msgid "Support"
+msgstr "Підтримка"
+
+#: feedback/views.py:28
+msgid "Feedback Sent Successfully!"
+msgstr "Відгук надіслано успішно!"
+
+#: feedback/views.py:29 feedback/views.py:48
+msgid "Thank You! We use feedback like this to improve Raw Search."
+msgstr "Дякуємо! Ми використовуємо такі відгуки, щоб покращити Raw Search."
+
+#: feedback/views.py:33
+msgid "Feedback Was Not Sent"
+msgstr "Відгук не надіслано"
+
+#: feedback/views.py:33
+msgid "Please, Provide information"
+msgstr "Будь ласка, надайте інформацію"
+
+#: feedback/views.py:61
+msgid "Thank You! We will contact you shortly."
+msgstr "Дякуємо! Ми зв'яжемося з вами найближчим часом."
+
+#: rawsearch/settings.py:164
+msgid "English"
+msgstr "Англійська"
+
+#: rawsearch/settings.py:165
+msgid "Polish"
+msgstr "Польська"
+
+#: rawsearch/settings.py:166
+msgid "Ukrainian"
+msgstr "Українська"
+
+#: users/AdminView.py:150
+msgid "Updated"
+msgstr "Оновлено"
+
+#: users/AdminView.py:229 users/AdminView.py:245
+#: users/templates/users/admin_templates/table_to_crawl_pages.html:82
+#: users/templates/users/admin_templates/table_to_crawl_sites.html:81
+msgid "Crawled"
+msgstr "Відскановано"
+
+#: users/AdminView.py:232
+msgid "Site Does Not Exist"
+msgstr "Сайт не існує"
+
+#: users/AdminView.py:248
+msgid "Page Does Not Exist"
+msgstr "Сторінка не існує"
+
+#: users/forms.py:29 users/forms.py:69
+#: users/templates/users/admin_templates/manage_users_template.html:63
+#: users/templates/users/general_templates/profile.html:112
+msgid "Username"
+msgstr "Ім'я користувача"
+
+#: users/forms.py:45 users/templates/users/login/auth-signin.html:24
+msgid "Password"
+msgstr "Пароль"
+
+#: users/forms.py:53
+msgid "Repeat Password"
+msgstr "Повторити пароль"
+
+#: users/forms.py:70
+#: users/templates/users/admin_templates/manage_users_template.html:61
+#: users/templates/users/admin_templates/manage_users_template.html:96
+#: users/templates/users/general_templates/profile.html:91
+msgid "First Name"
+msgstr "Ім'я"
+
+#: users/forms.py:71
+#: users/templates/users/admin_templates/manage_users_template.html:62
+#: users/templates/users/admin_templates/manage_users_template.html:98
+#: users/templates/users/general_templates/profile.html:97
+msgid "Last Name"
+msgstr "Прізвище"
+
+#: users/forms.py:73
+#: users/templates/users/admin_templates/manage_users_template.html:108
+msgid "User Type"
+msgstr "Тип користувача"
+
+#: users/forms.py:75 users/models.py:23
+msgid "About me"
+msgstr "Про мене"
+
+#: users/models.py:7
+msgid "Admin"
+msgstr "Адміністратор"
+
+#: users/models.py:8
+#: users/templates/users/admin_templates/users_dashboard.html:67
+msgid "Staff"
+msgstr "Персонал"
+
+#: users/models.py:9
+#: users/templates/users/admin_templates/users_dashboard.html:73
+msgid "Developer"
+msgstr "Розробник"
+
+#: users/models.py:10
+#: users/templates/users/admin_templates/users_dashboard.html:77
+msgid "Common User"
+msgstr "Звичайний користувач"
+
+#: users/models.py:13
+msgid "Good"
+msgstr "Добрий"
+
+#: users/models.py:14
+msgid "Suspicious"
+msgstr "Підозрілий"
+
+#: users/models.py:15
+msgid "Banned"
+msgstr "Заблокований"
+
+#: users/templates/users/admin_templates/add_to_queue.html:4
+#: users/templates/users/admin_templates/confirm_autocomplete.html:4
+#: users/templates/users/admin_templates/confirm_autocomplete.html:25
+msgid "Add to"
+msgstr "Додати до"
+
+#: users/templates/users/admin_templates/add_to_queue.html:4
+#: users/templates/users/admin_templates/add_to_queue.html:26
+#: users/templates/users/admin_templates/crawl_queue.html:5
+#: users/templates/users/admin_templates/crawl_queue.html:21
+#: users/templates/users/admin_templates/crawl_queue.html:25
+#: users/templates/users/admin_templates/crawler_dashboard.html:76
+#: users/templates/users/admin_templates/includes/sidebar.html:188
+msgid "Queue"
+msgstr "Черга"
+
+#: users/templates/users/admin_templates/add_to_queue.html:100
+#: users/templates/users/admin_templates/crawl_queue.html:28
+msgid "Add to queue"
+msgstr "Додати в чергу"
+
+#: users/templates/users/admin_templates/add_to_queue.html:101
+#: users/templates/users/admin_templates/edit_user_perm.html:104
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: users/templates/users/admin_templates/confirm_autocomplete.html:4
+#: users/templates/users/admin_templates/confirm_autocomplete.html:21
+#: users/templates/users/admin_templates/confirm_autocomplete.html:25
+#: users/templates/users/admin_templates/index.html:106
+msgid "Autocomplete"
+msgstr "Автозавершення"
+
+#: users/templates/users/admin_templates/confirm_autocomplete.html:78
+#: users/templates/users/admin_templates/problem_table.html:64
+msgid "Clear"
+msgstr "Очистити"
+
+#: users/templates/users/admin_templates/confirm_autocomplete.html:87
+#: users/templates/users/admin_templates/contact_entries.html:62
+#: users/templates/users/admin_templates/feedbacks.html:62
+#: users/templates/users/admin_templates/manage_users_template.html:60
+#: users/templates/users/admin_templates/problem_table.html:74
+#: users/templates/users/admin_templates/supports_table.html:62
+#: users/templates/users/admin_templates/table_to_crawl_pages.html:64
+#: users/templates/users/admin_templates/table_to_crawl_sites.html:61
+msgid "ID"
+msgstr "ІД"
+
+#: users/templates/users/admin_templates/confirm_autocomplete.html:103
+#: users/templates/users/admin_templates/confirm_autocomplete.html:108
+msgid "Approve"
+msgstr "Затвердити"
+
+#: users/templates/users/admin_templates/confirm_autocomplete.html:104
+#: users/templates/users/admin_templates/confirm_autocomplete.html:106
+msgid "Reject"
+msgstr "Відхилити"
+
+#: users/templates/users/admin_templates/contact_entries.html:25
+msgid "Contact Table"
+msgstr "Таблиця контактів"
+
+#: users/templates/users/admin_templates/crawl_queue.html:70
+msgid "Site/Page"
+msgstr "Сайт/сторінка"
+
+#: users/templates/users/admin_templates/crawl_queue.html:71
+#: users/templates/users/admin_templates/table_to_crawl_pages.html:65
+#: users/templates/users/admin_templates/table_to_crawl_sites.html:62
+msgid "URL"
+msgstr "URL"
+
+#: users/templates/users/admin_templates/crawl_queue.html:72
+msgid "Added by"
+msgstr "Додано"
+
+#: users/templates/users/admin_templates/crawl_queue.html:92
+#: users/templates/users/admin_templates/table_to_crawl_pages.html:90
+#: users/templates/users/admin_templates/table_to_crawl_sites.html:88
+msgid "Delete"
+msgstr "Видалити"
+
+#: users/templates/users/admin_templates/crawler_dashboard.html:5
+#: users/templates/users/admin_templates/includes/sidebar.html:181
+msgid "Crawler Dashboard"
+msgstr "Панель Сканера"
+
+#: users/templates/users/admin_templates/crawler_dashboard.html:18
+#: users/templates/users/admin_templates/includes/sidebar.html:44
+#: users/templates/users/admin_templates/users_dashboard.html:19
+#: users/templates/users/develop_template/index.html:4
+#: users/templates/users/develop_template/index.html:17
+#: users/templates/users/develop_template/index.html:22
+#: users/templates/users/staff_template/index.html:4
+#: users/templates/users/staff_template/index.html:17
+#: users/templates/users/staff_template/index.html:22
+#: users/templates/users/user_template/index.html:4
+#: users/templates/users/user_template/index.html:17
+#: users/templates/users/user_template/index.html:22
+msgid "Dashboard"
+msgstr "Панель"
+
+#: users/templates/users/admin_templates/crawler_dashboard.html:66
+#: users/templates/users/admin_templates/table_to_crawl_sites.html:20
+#: users/templates/users/admin_templates/table_to_crawl_sites.html:24
+msgid "Websites"
+msgstr "Веб-сайти"
+
+#: users/templates/users/admin_templates/crawler_dashboard.html:72
+#: users/templates/users/admin_templates/includes/sidebar.html:202
+#: users/templates/users/admin_templates/table_to_crawl_pages.html:21
+#: users/templates/users/admin_templates/table_to_crawl_pages.html:25
+msgid "Pages"
+msgstr "Сторінки"
+
+#: users/templates/users/admin_templates/crawler_dashboard.html:114
+msgid "of sites"
+msgstr "сайтів"
+
+#: users/templates/users/admin_templates/crawler_dashboard.html:135
+msgid "Crawled Sites"
+msgstr "Скановані Сайти"
+
+#: users/templates/users/admin_templates/crawler_dashboard.html:135
+#: users/templates/users/admin_templates/users_dashboard.html:145
+msgid "per year"
+msgstr "за рік"
+
+#: users/templates/users/admin_templates/edit_user_perm.html:4
+#: users/templates/users/admin_templates/edit_user_perm.html:17
+#: users/templates/users/admin_templates/edit_user_perm.html:21
+msgid "Edit Record"
+msgstr "Редагувати запис"
+
+#: users/templates/users/admin_templates/edit_user_perm.html:103
+#: users/templates/users/admin_templates/table_to_crawl_pages.html:93
+#: users/templates/users/admin_templates/table_to_crawl_sites.html:90
+#: users/templates/users/general_templates/profile.html:138
+msgid "Update"
+msgstr "Оновити"
+
+#: users/templates/users/admin_templates/example_page.html:5
+msgid "Title"
+msgstr "Назва"
+
+#: users/templates/users/admin_templates/example_page.html:19
+#: users/templates/users/admin_templates/example_page.html:23
+#: users/templates/users/admin_templates/problem_table.html:24
+msgid "Problem Table"
+msgstr "Таблиця проблем"
+
+#: users/templates/users/admin_templates/feedbacks.html:5
+msgid "Feedbacks"
+msgstr "Відгуки"
+
+#: users/templates/users/admin_templates/feedbacks.html:25
+msgid "Feedbacks Table"
+msgstr "Таблиця відгуків"
+
+#: users/templates/users/admin_templates/includes/navigation.html:27
+#: users/templates/users/admin_templates/includes/sidebar.html:221
+#: users/templates/users/develop_template/includes/navigation.html:26
+#: users/templates/users/develop_template/includes/sidebar.html:60
+#: users/templates/users/staff_template/includes/navigation.html:26
+#: users/templates/users/staff_template/includes/sidebar.html:60
+#: users/templates/users/user_template/includes/navigation.html:26
+#: users/templates/users/user_template/includes/sidebar.html:60
+msgid "Log Out"
+msgstr "Вийти"
+
+#: users/templates/users/admin_templates/includes/pagitation.html:12
+msgid "First"
+msgstr "Перша"
+
+#: users/templates/users/admin_templates/includes/pagitation.html:50
+msgid "Last"
+msgstr "Остання"
+
+#: users/templates/users/admin_templates/includes/sidebar.html:36
+#: users/templates/users/develop_template/includes/sidebar.html:36
+#: users/templates/users/staff_template/includes/sidebar.html:36
+#: users/templates/users/user_template/includes/sidebar.html:36
+msgid "NAVIGATION"
+msgstr "НАВІГАЦІЯ"
+
+#: users/templates/users/admin_templates/includes/sidebar.html:65
+msgid "SERVICES"
+msgstr "ПОСЛУГИ"
+
+#: users/templates/users/admin_templates/includes/sidebar.html:73
+msgid "Account management"
+msgstr "Керування акаунтами"
+
+#: users/templates/users/admin_templates/includes/sidebar.html:82
+msgid "Account Dashboard"
+msgstr "Панель акаунтів"
+
+#: users/templates/users/admin_templates/includes/sidebar.html:89
+#: users/templates/users/admin_templates/manage_users_template.html:4
+#: users/templates/users/admin_templates/manage_users_template.html:23
+msgid "Accounts List"
+msgstr "Список акаунтів"
+
+#: users/templates/users/admin_templates/includes/sidebar.html:102
+msgid "Autocomplete Search"
+msgstr "Автозавершення пошуку"
+
+#: users/templates/users/admin_templates/includes/sidebar.html:114
+msgid "Entries"
+msgstr "Записи"
+
+#: users/templates/users/admin_templates/includes/sidebar.html:159
+#: users/templates/users/admin_templates/index.html:81
+#: users/templates/users/admin_templates/problem_table.html:5
+#: users/templates/users/admin_templates/problem_table.html:20
+msgid "Problems"
+msgstr "Проблеми"
+
+#: users/templates/users/admin_templates/includes/sidebar.html:195
+#: users/templates/users/admin_templates/index.html:170
+msgid "Sites"
+msgstr "Сайти"
+
+#: users/templates/users/admin_templates/includes/sidebar.html:207
+msgid "BACKUP"
+msgstr "Резервне копіювання"
+
+#: users/templates/users/admin_templates/includes/sidebar.html:213
+msgid "Manage Backups"
+msgstr "Керування резю копіями"
+
+#: users/templates/users/admin_templates/includes/sidebar.html:216
+#: users/templates/users/develop_template/includes/sidebar.html:55
+#: users/templates/users/staff_template/includes/sidebar.html:55
+#: users/templates/users/user_template/includes/sidebar.html:55
+msgid "Action Zone"
+msgstr "Зона дій"
+
+#: users/templates/users/admin_templates/index.html:49
+msgid "Elasticsearch Service Connection Status"
+msgstr "Стан підключення до служби Elasticsearch"
+
+#: users/templates/users/admin_templates/index.html:62
+msgid "Crawled vs. Indexed Data Status"
+msgstr "Статус сканованих та індексованих даних"
+
+#: users/templates/users/admin_templates/index.html:69
+msgid "Both halves of this graph should be equal."
+msgstr "Обидві половини цього графіка мають бути рівними."
+
+#: users/templates/users/admin_templates/index.html:69
+msgid "It indicates that all crawled content has been indexed."
+msgstr "Це вказує, що весь відсканований матеріал проіндексовано."
+
+#: users/templates/users/admin_templates/index.html:84
+msgid "Total"
+msgstr "Усього"
+
+#: users/templates/users/admin_templates/index.html:166
+msgid "Content"
+msgstr "Вміст"
+
+#: users/templates/users/admin_templates/index.html:180
+msgid "Videos"
+msgstr "Відео"
+
+#: users/templates/users/admin_templates/index.html:184
+msgid "Queries"
+msgstr "Запити"
+
+#: users/templates/users/admin_templates/index.html:199
+msgid "Support Feed"
+msgstr "Канал підтримки"
+
+#: users/templates/users/admin_templates/index.html:235
+msgid "Problem Feed"
+msgstr "Канал проблем"
+
+#: users/templates/users/admin_templates/index.html:251
+msgid "PROBLEM"
+msgstr "ПРОБЛЕМА"
+
+#: users/templates/users/admin_templates/index.html:289
+msgid "Indexed data"
+msgstr "Індексовані дані"
+
+#: users/templates/users/admin_templates/index.html:290
+msgid "Crawled data"
+msgstr "Відскановані дані"
+
+#: users/templates/users/admin_templates/index.html:325
+msgid "Connected"
+msgstr "Підключено"
+
+#: users/templates/users/admin_templates/index.html:329
+msgid "Not Connected"
+msgstr "Не підключено"
+
+#: users/templates/users/admin_templates/index.html:332
+msgid "Something went wrong"
+msgstr "Щось пішло не так"
+
+#: users/templates/users/admin_templates/manage_users_template.html:18
+msgid "Account Management"
+msgstr "Керування обліковим записом"
+
+#: users/templates/users/admin_templates/manage_users_template.html:19
+msgid "Users"
+msgstr "Користувачі"
+
+#: users/templates/users/admin_templates/manage_users_template.html:77
+msgid "Edit"
+msgstr "Редагувати"
+
+#: users/templates/users/admin_templates/manage_users_template.html:79
+#: users/templates/users/admin_templates/problem_table.html:89
+msgid "Details"
+msgstr "Деталі"
+
+#: users/templates/users/admin_templates/manage_users_template.html:117
+#: users/templates/users/admin_templates/problem_table.html:121
+msgid "Close"
+msgstr "Закрити"
+
+#: users/templates/users/admin_templates/problem_table.html:92
+#: users/templates/users/admin_templates/supports_table.html:82
+msgid "Mark as solved"
+msgstr "Позначити як вирішене"
+
+#: users/templates/users/admin_templates/supports_table.html:25
+msgid "Support Table"
+msgstr "Таблиця підтримки"
+
+#: users/templates/users/admin_templates/supports_table.html:81
+msgid "Reply"
+msgstr "Відповісти"
+
+#: users/templates/users/admin_templates/table_to_crawl_pages.html:5
+msgid "Crawl Pages"
+msgstr "Сканувати Сторінки"
+
+#: users/templates/users/admin_templates/table_to_crawl_pages.html:66
+#: users/templates/users/admin_templates/table_to_crawl_sites.html:63
+msgid "Stage"
+msgstr "Стадія"
+
+#: users/templates/users/admin_templates/table_to_crawl_pages.html:80
+#: users/templates/users/admin_templates/table_to_crawl_sites.html:79
+msgid "Not crawled"
+msgstr "Не скановано"
+
+#: users/templates/users/admin_templates/table_to_crawl_pages.html:88
+#: users/templates/users/admin_templates/table_to_crawl_sites.html:87
+msgid "Crawl"
+msgstr "Сканувати"
+
+#: users/templates/users/admin_templates/table_to_crawl_pages.html:95
+msgid "Complete Delete"
+msgstr "Видалити Повністю"
+
+#: users/templates/users/admin_templates/table_to_crawl_sites.html:5
+msgid "Crawl Sites"
+msgstr "Сканувати сайти"
+
+#: users/templates/users/admin_templates/table_to_crawl_sites.html:94
+msgid "No data"
+msgstr ""
+
+#: users/templates/users/admin_templates/users_dashboard.html:5
+msgid "Users Dashboard"
+msgstr "Панель Користувачів"
+
+#: users/templates/users/admin_templates/users_dashboard.html:18
+#: users/templates/users/admin_templates/users_dashboard.html:23
+msgid "Accounts"
+msgstr "Облікові записи"
+
+#: users/templates/users/admin_templates/users_dashboard.html:61
+msgid "All Accounts"
+msgstr "Усі облікові Записи"
+
+#: users/templates/users/admin_templates/users_dashboard.html:120
+msgid "of users"
+msgstr "користувачів"
+
+#: users/templates/users/admin_templates/users_dashboard.html:145
+msgid "A number of users joined"
+msgstr "Кількість приєднаних користувачів"
+
+#: users/templates/users/general_templates/change-password.html:5
+#: users/templates/users/general_templates/change-password.html:52
+msgid "Reset password"
+msgstr "Повторити пароль"
+
+#: users/templates/users/general_templates/change-password.html:91
+#: users/templates/users/general_templates/profile.html:76
+msgid "Change password"
+msgstr "Змінити пароль"
+
+#: users/templates/users/general_templates/profile.html:5
+#: users/templates/users/general_templates/profile.html:20
+#: users/templates/users/general_templates/profile.html:24
+#: users/templates/users/general_templates/profile.html:138
+msgid "Profile"
+msgstr "Профіль"
+
+#: users/templates/users/general_templates/profile.html:85
+msgid "General information"
+msgstr "Загальна інформація"
+
+#: users/templates/users/general_templates/profile.html:117
+msgid "Private information"
+msgstr "Приватна інформація"
+
+#: users/templates/users/general_templates/profile.html:121
+msgid "Secret word"
+msgstr "Секретне слово"
+
+#: users/templates/users/general_templates/profile.html:123
+msgid "This word is needed for password resetting."
+msgstr "Це слово потрібне для скидання пароля"
+
+#: users/templates/users/general_templates/profile.html:131
+msgid "About Me"
+msgstr "Про мене"
+
+#: users/templates/users/login/auth-signin.html:5
+#: users/templates/users/login/auth-signin.html:18
+#: users/templates/users/login/auth-signin.html:49
+msgid "Sign in"
+msgstr "Вхід"
+
+#: users/templates/users/login/auth-signin.html:22
+msgid "Add your credentials"
+msgstr "Додайте свої облікові дані"
+
+#: users/templates/users/login/auth-signin.html:46
+msgid "Remember me"
+msgstr "Запам'ятати мене"
+
+#: users/templates/users/login/auth-signin.html:50
+msgid "Don’t have an account"
+msgstr "Не маю облікового запису"
+
+#: users/templates/users/login/auth-signin.html:50
+#: users/templates/users/login/auth-signup.html:6
+#: users/templates/users/login/auth-signup.html:21
+#: users/templates/users/login/auth-signup.html:70
+msgid "Sign up"
+msgstr "Зареєструватися"
+
+#: users/templates/users/login/auth-signup.html:66
+msgid "I agree with"
+msgstr "Я згоден з"
+
+#: users/templates/users/login/auth-signup.html:67
+msgid "terms"
+msgstr "умовами"
+
+#: users/templates/users/login/auth-signup.html:72
+msgid "Have an account"
+msgstr "Маю обліковий запис"
+
+#: users/templates/users/login/auth-signup.html:72
+msgid "Log in"
+msgstr "Увійти"
+
+#: users/views.py:32
+msgid "Invalid credentials"
+msgstr "Недійсні облікові дані"
+
+#: users/views.py:34
+msgid "Error validating the form"
+msgstr "Помилка перевірки форми"
+
+#: users/views.py:49
+msgid "User created."
+msgstr "Користувач створений."
+
+#: users/views.py:52
+msgid "Form is not valid"
+msgstr "Форма недійсна"
+
+#: users/views.py:61
+msgid "Method Not Allowed"
+msgstr "Метод не дозволений"
+
+#: users/views.py:69
+msgid "Invalid Login Credentials!"
+msgstr "Недійсні облікові дані для входу!"
+
+#: users/views.py:82
+msgid "The password has been changed."
+msgstr "Пароль змінено."
+
+#: users/views.py:97
+msgid "Invalid Method"
+msgstr "Недійсний метод"
+
+#: users/views.py:115
+msgid "Profile Updated Successfully"
+msgstr "Профіль успішно оновлено!"
+
+#: users/views.py:118
+msgid "Failed to Update Profile"
+msgstr "Не вдалося оновити профіль"
+
+#, fuzzy
+#~| msgid "Add to"
+#~ msgid "Add"
+#~ msgstr "Додати до"
+
+#, fuzzy
+#~| msgid "Queue"
+#~ msgid "queue"
+#~ msgstr "Черга"
+
+#~ msgid "Email address"
+#~ msgstr "Адреса електронної пошти"
+
+#~ msgid "Error!"
+#~ msgstr "Помилка!"

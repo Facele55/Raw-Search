@@ -1,0 +1,94 @@
+{% extends "users/login/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% trans 'Sign up' %}
+{% endblock %}
+
+{% block content %}
+
+	<!-- [ auth-signup ] start -->
+	<div class="auth-wrapper">
+		<div class="container-fluid">
+			<div class="card">
+				<div class="row align-items-center text-center">
+					<div class="col-md-12">
+						<div class="card-body">
+                            <a href="{% url 'core:index' %}"><img src="{% static 'logo/raw1.png' %}" alt="Raw Search Logo" class="img-fluid mb-4"></a>
+                            <h4 class="mb-3 f-w-400">
+								<h4 class="mb-3 f-w-400">
+                                    {% trans 'Sign up' %}
+								</h4>
+                            </h4>
+                            <span class="mb-0 text-muted">
+                                {% block messages %}{% endblock %}
+							</span>
+                            <form role="form" method="post" action="">
+                                {% csrf_token %}
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="feather icon-user"></i></span>
+                                    </div>
+                                    {{ form.username }}
+                                </div>
+                                <span class="text-error">{{ form.username.errors }}</span>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="feather icon-mail"></i></span>
+                                    </div>
+                                    {{ form.email }}
+                                </div>
+                                <span class="text-error">{{ form.email.errors }}</span>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="feather icon-lock "></i></span>
+                                    </div>
+                                    {{ form.password1 }}
+                                    <span class="input-group-text">
+                                        <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span>
+                                    </span>
+                                </div>
+                                <span class="text-error">{{ form.password1.errors }}</span>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="feather icon-lock"></i></span>
+                                    </div>
+                                    {{ form.password2 }}
+                                    <span class="input-group-text">
+                                        <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span>
+                                    </span>
+                                </div>
+                                <span class="text-error">{{ form.password2.errors }}</span>
+                                <div class="form-group text-left mt-2">
+                                    <div class="checkbox checkbox-primary d-inline">
+                                        <input type="checkbox" name="checkbox-fill-2" id="checkbox-fill-2" required>
+                                        <label for="checkbox-fill-2" class="cr">{% trans 'I agree with' %}
+                                            <a href="{% url 'core:privacy_policy' %}">{% trans 'terms' %}</a>.</label>
+										</div>
+                                </div>
+                                <button type="submit" name="register" class="btn btn-primary btn-block mb-4">{% trans 'Sign up' %} </button>
+                            </form>
+                            <p class="mb-0 text-muted">{% trans 'Have an account' %}? <a href="{% url 'users:login' %}" class="f-w-400">{% trans 'Log in' %}</a></p>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- [ auth-signup ] end -->
+{% endblock content %}
+{% block javascripts %}
+    <script>
+        $(document).on('click', '.toggle-password', function() {
+            $(this).toggleClass("fa-eye fa-eye-slash");
+
+            var input1 = $("#id_password1");
+            input1.attr('type') === 'password' ? input1.attr('type','text') : input1.attr('type','password')
+
+            var input2 = $("#id_password2");
+            input2.attr('type') === 'password' ? input2.attr('type','text') : input2.attr('type','password')
+        });
+
+    </script>
+{% endblock javascripts %} 

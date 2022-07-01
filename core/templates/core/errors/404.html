@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}
+    404
+
+{% endblock %}
+
+{% block content %}
+    {% include 'core/header.html' %}
+
+    <h1 class="bd">
+        <center>404 {% trans 'Not Found' %}</center>
+    </h1>
+
+
+{% endblock %}

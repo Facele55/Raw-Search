@@ -1,0 +1,74 @@
+{% extends "users/login/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'Sign in' %}{% endblock %}
+
+{% block content %}
+
+	<!-- [ auth-signin ] start -->
+    <div class="auth-wrapper">
+        <div class="container">
+			<div class="card">
+				<div class="row align-items-center text-center">
+					<div class="col-md-12">
+						<div class="card-body">
+                            <a href="{% url 'core:index' %}"><img src="{% static 'logo/raw1.png' %}" alt="Raw Search logo" class="img-fluid mb-4"></a>
+
+							<h4 class="mb-3 f-w-400">{% trans 'Sign in' %}</h4>
+                            <span class="mb-0 text-muted">
+                                {% block messages %}{% endblock %}
+                            </span>
+                            {% trans 'Add your credentials' %}
+                            {% translate "Email" as em %}
+                            {% translate "Password" as pa %}
+
+                            <form action="{% url 'users:do_login' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="feather icon-mail"></i></span>
+                                    </div>
+                                    <input type="email" class="form-control" placeholder="{{ em }}" name="email">
+                                </div>
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="feather icon-lock"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control" placeholder="{{ pa }}" name="password">
+                                    <span class="input-group-text">
+                                        <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span>
+                                    </span>
+                                </div>
+                                <div class="form-group text-left mt-2">
+                                    <div class="checkbox checkbox-primary d-inline">
+                                        <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" checked="">
+                                        <label for="checkbox-fill-a1" class="cr">{% trans 'Remember me' %}  </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-block btn-primary mb-4">{% trans 'Sign in' %} </button>
+                                <p class="mb-0 text-muted">{% trans 'Don’t have an account' %}? <a href="{% url 'users:sign_up' %}" class="f-w-400">{% trans 'Sign up' %} </a></p>
+                                <!-- /.col -->
+                            </form>
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- [ auth-signin ] end -->
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+    <script>
+
+$(document).on('click', '.toggle-password', function() {
+    $(this).toggleClass("fa-eye fa-eye-slash");
+
+    var input1 = $("[name='password']");
+    input1.attr('type') === 'password' ? input1.attr('type','text') : input1.attr('type','password')
+});
+    </script>
+{% endblock javascripts %}
+

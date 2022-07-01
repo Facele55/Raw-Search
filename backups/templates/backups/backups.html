@@ -1,0 +1,131 @@
+{% extends "users/admin_templates/layouts/base.html" %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Backups' %}
+{% endblock %}
+<!-- Element injected in the BODY element -->
+{% block body_class %} sidebar-mini {% endblock body_class %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6 float-sm-right">
+                        <ol class="breadcrumb float-sm-left">
+                            <li class="breadcrumb-item"><a href="{% url 'users:index' %}"><i
+                                    class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item active">{% trans 'Backups' %} </li>
+                        </ol>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>{% trans 'Backup Details' %}</h5>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            {% if messages %}
+                <div class="form-group">
+                    <div class="col-12">
+                        {% for message in messages %}
+                            {% if message.tags == "error" %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                     style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% elif message.tags == "success" %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                     style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            <!-- Default box -->
+            <div class="card ">
+                <div class="card-body table-responsive rounded p-0">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>{% trans 'Application' %}</th>
+                            <th>{% trans 'Action' %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{% trans 'All databases' %}</td>
+                            <td>
+                                <button class="btn btn-outline-danger">
+                                    <a class="text-bold text-dark link-dark" href="{% url 'backups:all_db_backup' %}">
+                                        {% blocktrans %}Backup of all the databases{% endblocktrans %}
+                                    </a>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Core' %}</td>
+                            <td><a class="text-bold text-dark link-dark btn btn-outline-warning" type="button"
+                                   href="{% url 'backups:core_backup' %}">{% trans 'Do backup' %}
+                            </a></td>
+                        </tr>
+                        <tr>
+                            <td>Users</td>
+                            <td><a class="text-bold text-dark link-dark btn btn-outline-warning" type="button"
+                                   href="{% url 'backups:users_backup' %}">{% trans 'Do backup' %}
+                            </a></td>
+                        </tr>
+                        <tr>
+                            <td>Feedback</td>
+                            <td><a class="text-bold text-dark link-dark btn btn-outline-warning" type="button"
+                                   href="{% url 'backups:feedback_backup' %}">{% trans 'Do backup' %}
+                            </a>
+                            </td>
+                        </tr><tr>
+                            <td>Crawler</td>
+                            <td><a class="text-bold text-dark link-dark btn btn-outline-warning" type="button"
+                                   href="{% url 'backups:crawler_backup' %}">{% trans 'Do backup' %}
+                            </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Analytics</td>
+                            <td>
+                                <a class="btn btn-outline-warning text-bold text-dark link-dark disabled" type="button"
+                                   href="{% url 'backups:analytics_backup' %}">{% trans 'Do backup' %}</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+
+{% endblock javascripts %}

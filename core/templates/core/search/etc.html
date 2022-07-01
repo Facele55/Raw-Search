@@ -1,0 +1,76 @@
+{% load humanize %}
+{% load i18n %}
+
+
+{% block content %}
+    {% if results %}
+        <h6 class="nomargin">
+            {% trans 'About' %} {{ count|intcomma }}
+            {% blocktrans count counter=1 %}result{% plural %}results{% endblocktrans %}
+            {% trans 'for' %}
+            <b>{{ query }}</b>
+            {% trans 'in' %}
+            <small class="text-success">{{ total|floatformat:"7g" }} {% trans 'sec' %} </small>
+        </h6>
+        {% for result in object_list %}
+            <div class="">
+                {{ result.site_url }}
+                <div class="">
+                    <div class="clearfix search-result p-3"><!-- item -->
+                        <a target="_blank" rel="nofollow" href="{{ result.url }}">
+                            <h5>{{ result.title }}</h5>
+                        </a>
+                        <small class="text-success">
+                            <a class="text-success" target="_blank" rel="nofollow" href="{{ result.url }}"> {{ result.url }}</a>
+                        </small>
+                        <p>
+
+                        </p>
+                    </div>  <!--  item -->
+                </div>
+            </div>
+        {% endfor %}
+
+        {% if count >= 10 %}
+                {% include 'core/search/pagitation.html' %}
+        {% endif %}
+
+    {% else %}
+            <h2 class="bd">{% trans 'No Results Found' %}</h2>
+    {% endif %}
+{% endblock %}
+
+
+{% block js %}
+    <script>
+        $.ajax({
+            url: "{% url 'users:elasticsearch_status' %}",
+            type: "GET",
+            timeout: 1000,
+            // cors
+            statusCode: {
+                200: function (response) {
+                    if (response.status === 'inactive') {
+                        // console.log('Inactive');
+                        window.location.replace("{% url 'core:503' %}");
+                    } else {
+                        //window.location.replace("{% url 'core:503' %}");
+                        //  console.log(response.status);
+                    }
+
+                    //alert('Working!');
+                },
+                400: function (response) {
+                    console.log("400", response.status);
+                    //alert('Not working!');
+                    window.location.replace("{% url 'core:404' %}");
+                },
+                0: function (response) {
+                    //console.log("0", response.status);
+                    //alert('Not working!');
+                }
+            }
+        });
+
+    </script>
+{% endblock %}

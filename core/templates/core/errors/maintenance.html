@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans 'Temporary Maintenance' %}{% endblock %}
+
+{% block content %}
+    {% include 'core/header.html' %}
+
+    <h1 class="bd">
+        <center>{% trans 'Temporary Maintenance' %}
+        </center>
+    </h1>
+
+{% endblock %}

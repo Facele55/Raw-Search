@@ -1,0 +1,154 @@
+{% extends "users/admin_templates/layouts/base.html" %}
+{% load humanize %}
+{% load static %}
+{% load i18n %}
+{% block title %} {% trans 'Users Dashboard' %} {% endblock %}
+<!-- Element injected in the BODY element -->
+{% block body_class %} sidebar-mini {% endblock body_class %}
+
+{% block content %}
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6 float-sm-right">
+              <ol class="breadcrumb float-sm-left">
+                  <li class="breadcrumb-item"><a href="{% url 'users:index' %}"><i class="fas fa-home"></i></a></li>
+                  <li class="breadcrumb-item">{% trans 'Accounts' %}</li>
+                  <li class="breadcrumb-item active">{% trans 'Dashboard' %} </li>
+              </ol>
+          </div>
+          <div class="col-sm-6">
+              <h5>{% trans 'Accounts' %} </h5>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+      <!-- Main content -->
+    <section class="content">
+            {% if messages %}
+                <div class="form-group">
+                    <div class="col-12">
+                        {% for message in messages %}
+                            {% if message.tags == "error" %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% elif message.tags == "success" %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+      <!-- Default box -->
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card bg-primary text-white">
+                <div class="card-body bg-patern-white">
+                    <div class="row">
+                        <div class="col-auto">
+                            <span class="h3">{% trans 'All Accounts' %}</span>
+                            <h3 class="text-left text-bold"><span>
+                                {{ users_sum|intcomma }}
+                            </span></h3>
+                        </div>
+                        <div class="col text-right">
+                            <span class="text-white">{% trans 'Staff' %}</span>
+                            <h2 class="mb-0 text-white">{{ count_users_staff }}</h2>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <span class="ml-3">{% trans 'Developer' %}</span>
+                            <h3 class="m-0 text-white">{{ count_users_developer }}</h3>
+                        </div>
+                        <div class="col">
+                            <span class="ml-3">{% trans 'Common User' %}</span>
+                            <h3 class="m-0 text-white">{{ count_users_user }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+           <div class="col-sm-6">
+            <div class="card bg-secondary-alt shadow-sm">
+                <div class="card-body p-2">
+                    <div  class="ct-chart ct-double-octave ct-series-g">
+                        <div class="card-body row">
+                            <canvas id="users_by_year" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+var ctx = document.getElementById('users_by_year').getContext('2d');
+
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: [
+            {% for s in users_by_year %}
+            "{{ s.year }}",
+            {% endfor %}
+        ],
+        datasets: [{
+            label: '# {% trans 'of users' %}',
+             data: [
+              {% for s in users_by_year %}
+    "{{ s.total }}",
+    {% endfor %}
+            ],
+            fill: true,
+            backgroundColor: [
+
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        title: {
+            display: true,
+            text: '{% trans 'A number of users joined' %} / {% trans 'per year' %}'
+        },
+
+    }
+});
+
+
+
+    </script>
+{% endblock %}

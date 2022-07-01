@@ -1,0 +1,119 @@
+{% extends "users/admin_templates/layouts/base.html" %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Crawl Pages' %}  {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6 float-sm-right">
+                        <ol class="breadcrumb float-sm-left">
+                            <li class="breadcrumb-item"><a href="{% url 'users:index' %}"><i
+                                    class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item">{% trans 'Crawler' %}</li>
+                            <li class="breadcrumb-item active">{% trans 'Pages' %} </li>
+                        </ol>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>{% trans 'Pages' %} </h5>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            {% if messages %}
+                <div class="form-group">
+                    <div class="col-12">
+                        {% for message in messages %}
+                            {% if message.tags == "error" %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                     style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% elif message.tags == "success" %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                     style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                        <tr>
+                            <th>{% trans 'ID' %} </th>
+                            <th>{% trans 'URL' %} </th>
+                            <th>{% trans 'Stage' %} </th>
+                            <th>{% trans 'Action' %} </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in object_list %}
+                            <tr>
+                                <td>{{ i.id }}</td>
+                                <td>
+                                    <a target="_blank" href="{{ i.cr_url }}">{{ i.cr_url|truncatechars:70 }}
+                                    </a>
+                                </td>
+                                <td>
+                                    {% if i.status == 0 %}
+                                        {% trans 'Not crawled' %}
+                                    {% else %}
+                                        {% trans 'Crawled' %}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if i.status == 0 %}
+                                        <a href="{% url 'users:approve_page_crawl' i.id %}"
+                                           class="btn btn-success">{% trans 'Crawl' %} </a>
+                                        <a href="{% url 'crawler:delete_page' i.id %}"
+                                           class="btn btn-danger">{% trans 'Delete' %} </a>
+                                    {% else %}
+                                        <a href="{% url 'users:approve_page_crawl' i.id %}"
+                                           class="btn btn-warning">{% trans 'Update' %} </a>
+                                        <a href="{% url 'crawler:complete_delete' i.id %}"
+                                           class="btn btn-danger">{% trans 'Complete Delete' %} </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-2">
+                    {% include 'users/admin_templates/includes/pagitation.html' %}
+                </div>
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+
+{% endblock javascripts %}

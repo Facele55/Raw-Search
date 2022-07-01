@@ -1,0 +1,175 @@
+{% extends "users/admin_templates/layouts/base.html" %}
+{% load i18n %}
+{% block title %}
+    {% trans 'Add to' %} {% trans 'Autocomplete' %}
+{% endblock %}
+<!-- Element injected in the BODY element -->
+{% block body_class %} sidebar-mini {% endblock body_class %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6 float-sm-right">
+              <ol class="breadcrumb float-sm-left">
+                  <li class="breadcrumb-item"><a href="{% url 'users:index' %}"><i class="fas fa-home"></i></a></li>
+                  <li class="breadcrumb-item active">{% trans 'Autocomplete' %}</li>
+              </ol>
+          </div>
+          <div class="col-sm-6">
+              <h5>{% trans 'Add to' %} {% trans 'Autocomplete' %}</h5>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+            {% if messages %}
+                <div class="form-group">
+                    <div class="col-12">
+                        {% for message in messages %}
+                            {% if message.tags == "error" %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% elif message.tags == "success" %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+      <!-- Default box -->
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline mb-2">
+        <div class="input-group">
+            <form class="form form-row ms-5 me-3 col-auto" id="pageForm" method="get" onchange="document.getElementById('pageForm').submit();">
+                <input type="hidden" name="status" value="{{ query }}">
+                <select class="form-control" name="paginate_by">
+                    <option {% if paginate_by == '10' %} selected="selected"{% endif %} value="10">10</option>
+                    <option {% if paginate_by == '20' %} selected="selected"{% endif %} value="20">20</option>
+                    <option {% if paginate_by == '30' %} selected="selected"{% endif %} value="30">30</option>
+                    <option {% if paginate_by == '50' %} selected="selected"{% endif %} value="50">50</option>
+                    <option {% if paginate_by == '100' %} selected="selected"{% endif %} value="100">100</option>
+                </select>
+        </form>
+            <form class="form form-row col-auto" id="filterForm" method="get"
+              onchange="document.getElementById('filterForm').submit();" >
+                <input type="hidden" name="paginate_by" value="{% if paginate_by == None %}10{% else %}{{ paginate_by }}{% endif %}">
+                {{ filter.form }}
+        </form>
+
+          <div class="input-group-append">
+              <a href="{{ request.META.PATH_INFO }}" type="button" class="btn btn-info ms-2">{% trans 'Clear' %}</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+          <div class="card-body table-responsive rounded p-0">
+              <table class="table table-hover  text-nowrap">
+                  <thead class="thead-light">
+                  <tr>
+                      <th>{% trans 'ID' %} </th>
+                      <th>{% trans 'Name' %} </th>
+                      <th>{% trans 'Status' %} </th>
+                      <th>{% trans 'Action' %} </th>
+                  </tr>
+                  </thead>
+                  {% for row in object_list %}
+                      <tr>
+                          <td>{{ row.id }}</td>
+                          <td>
+                              {{ row.name|truncatewords_html:6 }}
+                          </td>
+                          <td class="{% if row.status == 'pending' %}bg-warning{% elif row.status == 'approved' %}bg-success{% else %}bg-danger{% endif %}">
+                          {{ row.get_status_display }} </td>
+                          <td>
+                              {% if row.status == 'pending' %}
+                                  <a href="{% url 'users:autocomplete_approve' res_id=row.id %}" class="btn btn-success">{% trans 'Approve' %} </a>
+                                  <a href="{% url 'users:autocomplete_reject' res_id=row.id %}" class="btn btn-danger">{% trans 'Reject' %} </a>
+                              {% elif row.status == 'approved' %}
+                                  <a href="{% url 'users:autocomplete_reject' res_id=row.id %}" class="btn btn-danger">{% trans 'Reject' %} </a>
+                              {% else %}
+                                  <a href="{% url 'users:autocomplete_approve' res_id=row.id %}" class="btn btn-success">{% trans 'Approve' %} </a>
+                              {% endif %}
+                          </td>
+                      </tr>
+                  {% endfor %}
+              </table>
+          </div>
+      <div class="d-flex flex-column m-auto pagination mt-5">
+    <nav aria-label="Page navigation">
+        <ul class="pagination pg-grey justify-content-center">
+{% if is_paginated %}
+            {% if page_obj.has_previous %}
+
+                <li class="page-item">
+                    <a class="page-link"  href="?{% if paginate_by %}paginate_by={{ paginate_by }}{% endif %}&{% if query %}status={{ query }}&{% endif %}page=1"> <i class="fa fa-chevron-left" aria-hidden="true"></i><i class="fa fa-chevron-left" aria-hidden="true"></i>  </a>
+                </li>
+
+                <li><a class="page-link" href="?{% if paginate_by %}paginate_by={{ paginate_by }}{% endif %}&{% if query %}status={{ query }}&{% endif %}page={{ page_obj.previous_page_number }}">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+                </li>
+            {% else %}
+                <li class="disabled"><span></span></li>
+            {% endif %}
+
+            {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == i %}
+                    <li class="page-item active"><a class="page-link">{{ i }}</a></li>
+                {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
+                    <li class="page-item" ><a class="page-link" href="?{% if paginate_by %}paginate_by={{ paginate_by }}{% endif %}&{% if query %}status={{query}}&{% endif %}page={{ i }}">{{ i }}</a></li>
+                {% else %}
+
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li>
+                    <a class="page-link" href="?{% if paginate_by %}paginate_by={{ paginate_by }}{% endif %}&{% if query %}status={{query}}&{% endif %}page={{ page_obj.next_page_number }}">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"  href="?{% if paginate_by %}paginate_by={{ paginate_by }}{% endif %}&{% if query %}status={{query}}&{% endif %}page={{ page_obj.paginator.num_pages }}">
+                         <i class="fa fa-chevron-right" aria-hidden="true"></i> <i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                </li>
+            {% else %}
+
+                <li class="page-item disabled"><span></span></li>
+            {% endif %}
+        {% endif %}
+        </ul>
+    </nav>
+</div>
+
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+    <script>
+         $("#id_status").addClass("col-auto form-control form-control-border bg-white");
+         $("label[for='id_status']").addClass("col-auto");
+    </script>
+{% endblock javascripts %}

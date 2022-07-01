@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root{
+    --primary-color: #fafafa;
+    --secondary-color: #333333;
+}
+.dark-theme{
+    --primary-color: #444444;
+    --secondary-color: #fafafa;
+}
+.headline {
+color: var(--secondary-color) ;
+}
+.highlight
+{ background-color: yellow }
+a{
+    text-decoration: none !important;
+}
+body {
+    background: var(--primary-color) ;
+    color: var(--secondary-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--secondary-color);
+    font-size: revert;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #333;
+}
+.main-footer{
+    bottom: 0;
+}
+/* Style the links inside the navigation bar */
+.topnav a {
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Right-aligned section inside the top navigation */
+.topnav-right {
+  float: right;
+}
+
+.footer {
+    color: blueviolet;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+.docs_ul {
+padding: 10px;
+}
+
+.docs_li {
+    margin: .9em;
+    padding: .3em;
+}
+.bd{
+    margin-top: 5em; margin-bottom: 5em;
+}

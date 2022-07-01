@@ -1,0 +1,12 @@
+__pycache__
+venv/
+.idea/
+
+.env
+.log.*
+
+dir/backup/*
+dir/logs/critic/*
+dir/logs/debug/*
+dir/logs/info/*
+dir/logs/warning/*

@@ -1,0 +1,169 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Crawler' %}
+{% endblock %}
+
+{% block content %}
+    {% include 'core/header.html' %}
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="submit"
+                    role="tab" aria-controls="home" aria-selected="true">{% trans 'Site' %} </button>
+        </li>
+        <!--   --->
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="submit"
+                    role="tab" aria-controls="profile" aria-selected="false">{% trans 'Page' %} </button>
+        </li>
+
+
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+            <div style="margin-bottom: 9.5em; margin-top: 1em" class="container-fluid p-1">
+                <h2 class="mb-9">{% trans 'Add website for crawling' %} </h2>
+
+                {% comment %} Display Messages {% endcomment %}
+                {% if messages %}
+                    <div class="form-group">
+                        <div class="col-12">
+                            {% for message in messages %}
+                                {% if message.tags == "error" %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                         style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% elif message.tags == "success" %}
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                         style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+                <form class="form-group" action="." method="POST" role="form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        {% comment %} Adding Form with All inputs Here{% endcomment %}
+                        {% for field in form %}
+                            <div class="mb-3">
+                                {{ field.errors }}
+                                {{ field }}
+                            </div>
+                            <button type="submit" name="filter" value="site" class="btn btn-outline-dark mb-4">
+                                <i class="fas fa-crow"></i>
+                                {% trans 'Add to Crawl' %} </button>
+                        {% endfor %}
+                    </div>
+
+                </form>
+
+
+            </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div style="margin-bottom: 9.5em; margin-top: 1em" class="container-fluid p-1">
+                <h2 class="mb-9"> {% trans 'Add webpage for crawling' %} </h2>
+                {% comment %} Display Messages {% endcomment %}
+                {% if messages %}
+                    <div class="form-group">
+                        <div class="col-12">
+                            {% for message in messages %}
+                                {% if message.tags == "error" %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                         style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% elif message.tags == "success" %}
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                         style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+                <form class="form-group" action="." method="POST" role="form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        {% comment %} Adding Form with All inputs Here{% endcomment %}
+                        {% for field in form %}
+                            <div class="mb-3">
+                                {{ field.errors }}
+                                {{ field }}
+                            </div>
+                            <button type="submit" name="filter" value="page" class="btn btn-outline-dark mb-4">
+                                <i class="fas fa-spider"></i>
+                                {% trans 'Add to Crawl' %}
+                            </button>
+                        {% endfor %}
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            // keyup event will be triggered when user leaves keyboard
+            $("#id_url").keyup(function () {
+                var url = $(this).val();
+
+                if (url !== "") {
+                    $.ajax({
+                        url: '{% url 'crawler:check_url_address_exist' %}',
+                        type: 'POST',
+                        data: {url: url}
+                    })
+                        .done(function (response) {
+                            //console.log(response);
+
+                            if (response === "True") {
+                                $(".url_error").remove();
+                                $("<span class='url_error' style='color: red; padding: 5px; font-weight: bold;'>{% trans 'This URL Already Exist' %}. </span>").insertBefore("#id_url")
+                            } else {
+                                $(".url_error").remove();
+                                $("<span class='url_error' style='color: green; padding: 5px; font-weight: bold;'>{% trans 'This URL is new' %}. </span>").insertBefore("#id_url")
+                            }
+                        })
+
+                        .fail(function () {
+                            console.log("Failed");
+                        })
+                } else {
+                    $(".url_error").remove();
+                }
+
+            })
+        })
+    </script>
+{% endblock %}

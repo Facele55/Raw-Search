@@ -1,0 +1,54 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Docs' %}
+{% endblock %}
+
+{% block content %}
+    {% include 'core/header.html' %}
+    <div class="container-fluid">
+        <h1 class="text-center text-info">{% trans 'Documentation' %}</h1>
+
+        <p>
+        <h1>Changelog</h1>
+        <h3>Version 0.1:</h3>
+        <ul>
+            <li><i class="fa fa-check-circle"></i> Created project skeleton</li>
+            <li><i class="fa fa-check-circle"></i> Created databases (PostgreSQL).</li>
+            <li><i class="fa fa-check-circle"></i> Imported the required libraries</li>
+        </ul>
+
+        <h3>Version 0.2:</h3>
+        <ul>
+            <li><i class="fa fa-check-circle"></i> Creating PosgtreSQL indexes</li>
+            <li><i class="fa fa-check-circle"></i> Remove &lt;b&gt; &lt;/b&gt; in search results output</li>
+            <li><i class="fa fa-check-circle"></i>Added functionality for finding and scraping <code>sitemap.xml</code>
+                and <code>robot.txt</code>  files; <br>
+                (These files are needed for getting to know which pages on this website we can or cannot crawl.)<br></li>
+            <li><i class="fa fa-check-circle"></i> Added functionality for crawling whole websites.</li>
+        </ul>
+
+        <h3>Version 0.3:</h3>
+        <ul>
+            <li><i class="fa fa-check-circle"></i> Analytics</li>
+            <li><i class="fa fa-check-circle"></i> Statistics</li>
+            <li><i class="fa fa-check-circle"></i> Improvements to the UI and UX (frontend and responsive views)</li>
+        </ul>
+
+        <h3>Version 0.4:</h3>
+        <ul>
+            <li><i class="fa fa-check-circle"></i> Translations</li>
+            <li><i class="fa fa-check-circle"></i> Security Improvements</li>
+        </ul>
+
+        <h3>Version 0.5:</h3>
+        <ul>
+            <li><i class="fa fa-hourglass-half"></i> Add sorting search results by language.</li>
+            <li><i class="fa fa-hourglass-half"></i> Improve the performance of search results.</li>
+        </ul>
+        </p>
+    </div>
+
+{% endblock %}

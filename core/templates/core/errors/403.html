@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}
+    403
+{% endblock %}
+
+{% block content %}
+    {% include 'core/header.html' %}
+
+    <h1 class="bd">
+        <center>403 {% trans 'Forbidden' %}</center>
+    </h1>
+
+{% endblock %}

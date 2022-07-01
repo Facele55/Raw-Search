@@ -1,0 +1,340 @@
+{% extends "users/admin_templates/layouts/base.html" %}
+{% load humanize %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Element injected in the BODY element -->
+{% block body_class %} sidebar-mini {% endblock body_class %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="content-wrapper">
+    <!-- Main content -->
+  {% if messages %}
+                <div class="form-group">
+                    <div class="col-12">
+                        {% for message in messages %}
+                            {% if message.tags == "error" %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% elif message.tags == "success" %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+      <section class="content">
+          <div class="container-fluid">
+              <div class="card bg-c-blue  order-card text-center">
+
+                  <h6 class="text-white">
+                      {% blocktranslate %}Elasticsearch Service Connection Status{% endblocktranslate %}
+                  <span class="inline float-right mr-3 mycheckbox" ><i style="font-size: 0.73em;" class="fas fa-sync"></i></span>
+                  </h6>
+                  <div id="status_display" class="card-body bg-c-white text-white"></div>
+              </div>
+        <!-- Small boxes (Stat box) -->
+        <!-- /.row -->
+
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-md-12 col-xl-4">
+                <div class="card {% if count_crawler_pages != count_content_search_index %} bg-warning {% else %}bg-success {% endif %}">
+                    <div class="card-header text-center">
+                        <h5 class="text-capitalize">{% trans 'Crawled vs. Indexed Data Status' %}</h5>
+                    </div>
+                    <div class="card-body pl-0 pb-0">
+                        <div class="card-body row">
+                            <canvas id="vsChart" style="min-height: 200px; height: 210px; max-height: 250px; max-width: 100%;"></canvas>
+                        </div>
+                    </div>
+                    <div class="card-footer text-dark">{% trans 'Both halves of this graph should be equal.' %} {% trans 'It indicates that all crawled content has been indexed.' %}</div>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-xl-8">
+                    <div class="row">
+
+                         <div class="col-sm-6">
+                            <div class="card bg-gradient-dark text-white">
+                                <div class="card-body bg-patern-white">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <span>{% trans 'Problems' %}</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="ml-0">{% trans 'Total' %}</span>
+                                            <h2 class="mb-0 text-white">{{ count_problem }}</h2>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-0">
+                                        <div class="col">
+                                            <span class="ml-0">{% trans 'Pending' %}</span>
+                                            <h3 class="m-0 text-white">{{ count_problem_pending }}</h3>
+                                        </div>
+                                        <div class="col">
+                                            <span class="ml-0">{% trans 'Solved' %}</span>
+                                            <h3 class="m-0 text-white">{{ count_problem_solved }}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="col-sm-6">
+                            <div class="card bg-gradient-indigo text-white">
+                                <div class="card-body bg-patern-white">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <span>{% trans 'Autocomplete' %}</span>
+                                            <h6 class="text-left text-bold"><span>
+                                                {{ count_autocomplete|intcomma }}
+                                            </span></h6>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="ml-0">{% trans 'Pending' %}</span>
+                                            <h2 class="mb-0 text-white">{{ count_autocomplete_pending|intcomma }}</h2>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <span class="ml-0">{% trans 'Approved' %}</span>
+                                            <h3 class="m-0 text-white">{{ count_autocomplete_approved|intcomma }}</h3>
+                                        </div>
+                                        <div class="col">
+                                            <span class="ml-0">{% trans 'Rejected' %}</span>
+                                            <h3 class="m-0 text-white">{{ count_autocomplete_rejected|intcomma }}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                         <div class="col-sm-4">
+                            <div class="card bg-gradient-olive">
+                                <div class="card-body bg-patern-white">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <span>{% trans 'Feedback' %}</span>
+                                            <h6 class="text-left text-bold"><span>
+                                                {{ feedback_sum|intcomma }}
+                                            </span></h6>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="ml-0">{% trans 'Support' %}</span>
+                                            <h2 class="mb-0">{{ count_support|intcomma }}</h2>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <span class="ml-0">{% trans 'Feedback' %}</span>
+                                            <h3 class="m-0">{{ count_feedback|intcomma }}</h3>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="card bg-gradient-lime text-light">
+                                <div class="card-body bg-patern">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <span class="h5">{% trans 'Core' %}</span>
+                                            <h6 class="text-right text-white text-bold"><span>
+                                                {{ core_sum|intcomma }}
+                                            </span></h6>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="ml-0">{% trans 'Content' %}</span>
+                                            <h2 class="mb-0 text-white">{{ count_content_search_index|intcomma }}</h2>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="ml-0">{% trans 'Sites' %}</span>
+                                            <h2 class="mb-0 text-white">{{ count_site_search_index|intcomma }}</h2>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <span class="ml-0">{% trans 'Images' %}</span>
+                                            <h3 class="m-0 text-white">{{ count_image_search_index|intcomma }}</h3>
+                                        </div>
+                                        <div class="col">
+                                            <span class="ml-0">{% trans 'Videos' %}</span>
+                                            <h3 class="m-0 text-white">{{ count_video_index|intcomma }}</h3>
+                                        </div>
+                                        <div class="col">
+                                            <span class="ml-0">{% trans 'Queries' %}</span>
+                                            <h3 class="m-0 text-white">{{ count_search_queries|intcomma }}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+           </div>
+
+                    </div>
+                </div>
+          <!-- right col -->
+            <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>{% trans 'Support Feed' %}</h5>
+                            <div class="card-header-right">
+                                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="feed-blog pl-0">
+                                {% for sup in support %}
+                                <li class="active-feed">
+                                    <div class="feed-user-img">
+                                        <img src="{% static 'assets/images/user/avatar-4.jpg' %}" class="img-radius " alt="User-Profile-Image">
+                                    </div>
+                                    <h6><span class="badge badge-danger">{% trans 'Support' %}</span> {{ sup.user }}
+                                        <small class="text-muted" style="float: right">{{ sup.timestamp }}</small></h6>
+                                        <div class="row">
+                                            <p class="m-b-15 m-t-15">{{ sup.subject }}</p>
+                                        <div class="col-auto text-center">
+                                            <h6 class="m-t-15 m-b-0">{{ sup.message }}</h6>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>{% trans 'Problem Feed' %}</h5>
+                    <div class="card-header-right">
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                            <ul class="feed-blog pl-0">
+                                {% for p in problem %}
+                                <li class="active-feed">
+                                    <h6><span class="badge badge-danger">{% trans 'PROBLEM' %}</span>  {{ p.name }}
+                                        <small class="text-muted" style="float: right">{{ p.timestamp }}</small></h6>
+                                        <div class="row">
+                                        <div class="col-auto text-center">
+                                            <h6 class="m-t-15 m-b-0">{{ p.error }}</h6>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+        </div>
+        </div>
+
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+$(function() {
+    getStatus(); // this is launched on load
+    $('.mycheckbox').click(function(){
+        getStatus(); // this is launched on checkbox click
+    })
+});
+
+$(document).ready(function() {
+    $('#vsChart').get(0).getContext('2d');
+    var chartData = {
+        labels: [
+            "{% trans 'Indexed data' %}",
+            "{% trans 'Crawled data' %}",
+        ],
+        datasets: [
+            {
+                data: [ {{ count_crawler_pages }}, {{ count_content_search_index }} ],
+                backgroundColor: ['#ffc107', '#f56954'],
+            },
+        ]
+    }
+        //-------------
+        //- PIE CHART -
+        //-------------
+        // Get context with jQuery - using jQuery's .get() method.
+    var pieChartCanvas = $('#vsChart').get(0).getContext('2d')
+    var pieOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    var usersChart = new Chart(pieChartCanvas, {
+        type: 'pie',
+        data: chartData,
+        options: pieOptions
+    })
+
+});
+
+function getStatus() {
+    $.ajax({
+        url: "{% url 'users:elasticsearch_status' %}",
+        type: "GET"
+    }).done(function (response) {
+        if (response.status === 'running'){
+            //console.log('Running');
+            $("#status_display").addClass('bg-c-green').removeClass('bg-c-white').text("{% trans 'Connected' %}");
+        }
+        else if (response.status === 'inactive') {
+            //console.log('Inactive');
+            $("#status_display").addClass('bg-c-red').removeClass('bg-c-white').text("{% trans 'Not Connected' %}");
+        }
+        else {
+            $("#status_display").addClass('bg-c-yellow').removeClass('bg-c-white').text("{% trans 'Something went wrong' %}");
+            //console.log(response.status);
+        }
+        //console.log("done", response.status);
+        });
+}
+</script>
+
+{% endblock javascripts %}

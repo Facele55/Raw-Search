@@ -1,0 +1,88 @@
+{% load humanize %}
+{% load i18n %}
+
+{% block content %}
+    {% if results %}
+        <h6 class="nomargin">
+
+            {% trans 'About' %} {{ count|intcomma }}
+            {% blocktrans count counter=count|length %}result{% plural %}results{% endblocktrans %}
+            {% trans 'for' %}
+            <b>{{ query }}</b> {% trans 'in' %}
+            <small class="text-success">{{ total|floatformat:"7g" }} {% trans 'sec' %} </small></h6>
+          
+
+       
+        <div class="row">
+            <div class="col-8">
+                 {% for result in object_list %}
+            <div class="clearfix">
+                <div class="search-result">
+                    <div class="p-3"><!-- item -->
+                        <a target="_blank" rel="nofollow" href="{{ result.url }}">
+                            <h5>{{ result.title }}</h5>
+                        </a>
+                        <small class="text-success">
+                            <a class="text-success" target="_blank" rel="nofollow" href="{{ result.url }}"> {{ result.url }}</a>
+                        </small>
+                        <p>
+                        </p>
+                    </div>  <!--  item -->
+                </div>
+            </div>
+        {% endfor %}
+            </div>
+            <div class="col-4">
+                {% for s in site %}
+                <a target="_blank" rel="nofollow" href="{{s.site_url}}">{{s.site_url}}</a>
+            {% endfor %}
+            
+        </div>
+        </div>
+
+        <p class="float-end"><a href="#"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a></p>
+
+        {% comment %} {% endcomment %}
+                    {% include 'core/search/pagitation.html' %}
+
+        {% if count >= 10 %}
+        {% endif %}
+    {% else %}
+    <h2 class="bd">{% trans 'No Results Found' %}</h2>
+        
+    {% endif %}
+{% endblock %}
+
+{% block js %}
+    <script>
+        $.ajax({
+            url: "{% url 'users:elasticsearch_status' %}",
+            type: "GET",
+            timeout: 1000,
+            // cors
+            statusCode: {
+                200: function (response) {
+                    if (response.status === 'inactive') {
+                        // console.log('Inactive');
+                        window.location.replace("{% url 'core:503' %}");
+                    } else {
+                        //window.location.replace("{% url 'core:503' %}");
+                        //  console.log(response.status);
+                    }
+
+                    //alert('Working!');
+                },
+                400: function (response) {
+                    console.log("400", response.status);
+                    //alert('Not working!');
+                    window.location.replace("{% url 'core:404' %}");
+                },
+                0: function (response) {
+                    //console.log("0", response.status);
+                    //alert('Not working!');
+                }
+            }
+        });
+
+    </script>
+{% endblock %}

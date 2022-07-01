@@ -1,0 +1,78 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+
+    <link rel="stylesheet" href="{% static 'js/jquery-ui-1.12.1/jquery-ui.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-5.1.0-dist/css/bootstrap.min.css' %}">
+
+
+    <script type="application/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="application/javascript" src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script type="application/javascript" src="{% static 'js/jquery-ui-1.12.1/jquery-ui.js' %}"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+    {% block css %}{% endblock %}
+</head>
+
+<body class="{% block body_style %}{% endblock %}">
+
+{% block content %}{% endblock %}
+
+
+
+{% block js %}{% endblock %}
+
+{% block footer %}
+    <footer class="container-fluid">
+        <ul class="nav justify-content-center border-bottom">
+            <li class="nav-item"><a href="{% url 'core:index' %}"
+                                    class="nav-link px-2 text-muted">{% trans 'Home' %} </a></li>
+            <li class="nav-item"><a href="{% url 'core:search' %}"
+                                    class="nav-link px-2 text-muted">{% trans 'Search' %} </a></li>
+            <li class="nav-item"><a href="{% url 'core:docs' %}"
+                                    class="nav-link px-2 text-muted">{% trans 'Documentation' %} </a></li>
+            <li class="nav-item"><a href="{% url 'core:privacy_policy' %}"
+                                    class="nav-link px-2 text-muted">{% trans 'Privacy Policy' %} </a></li>
+            <li class="nav-item"><a href="{% url 'feedback:form' %}"
+                                    class="nav-link px-2 text-muted">{% trans 'Feedback' %} </a></li>
+            <li class="nav-item"><a href="{% url 'core:about' %}"
+                                    class="nav-link px-2 text-muted">{% trans 'About Project' %} </a></li>
+            <li class="nav-item"><a href="{% url 'feedback:contact' %}"
+                                    class="nav-link px-2 text-muted">{% trans 'Contact' %} </a></li>
+            <li class="nav-item float-right"><a href="{% url 'users:index' %}"
+                                                class="nav-link px-2 text-muted">{% trans 'User Profile' %} </a></li>
+            {% if user.is_authenticated %}
+                <li class="nav-item float-right"><a href="{% url 'admin:index' %}"
+                                                    class="nav-link px-2 text-muted">{% trans 'Admin Dashboard' %} </a>
+                </li>
+                <li class="nav-item"><a href="{% url 'crawler:index' %}"
+                                        class="nav-link px-2 text-muted">{% trans 'Crawler' %} </a></li>
+            {% else %}
+            {% endif %}
+        </ul>
+        <p class="text-center text-muted">&copy; 2021-{% now "Y" %} Raw Search <span
+                class="float-right"> <b>{% trans 'Version' %} </b>0.4</span></p>
+    </footer>
+
+{% endblock %}
+
+<script type="application/javascript" src="{% static 'bootstrap-5.1.0-dist/js/bootstrap.min.js' %}"></script>
+<script type="application/javascript" src="{% static 'bootstrap-5.1.0-dist/js/bootstrap.bundle.min.js' %}"></script>
+<script type="application/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% load static %}
+{% load i18n %}
+
+<style>
+    .ui-autocomplete { max-height: 40%; overflow-y: scroll; overflow-x: hidden;}
+</style>
+<form action="{{ action_path }}" method="GET">
+    <div class="row col">
+        <div class="input-group ui-widget">
+            <input type="text" id="auto_com" name="q" value="{{ query }}" class="form-control round"
+                   placeholder="{% trans 'Start searching' %}..."  autocomplete="on" required>
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-outline-dark mb-1">
+                    <i class="fas fa-search"></i>
+                    {% trans 'Search' %}
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(function() {
+        $("#auto_com").autocomplete({
+            source: "{% url 'core:autocomplete' %}",
+            minLength: 3,
+    });
+  });
+</script>
