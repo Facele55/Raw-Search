@@ -5,10 +5,11 @@
 ## Raw Search it's my diploma project for the topic "Design and implementation of a web search engine."
 ### Used Technologies in the project:
 
-    - Django for backend
-    - PostgreSQL and SQLite3 databases
-    - Bootstrap and jQuery for frontend
-    - Elasticsearch as the search engine
+    • Django for backend
+    • PostgreSQL and SQLite3 databases
+    • Bootstrap and jQuery for frontend
+    • Elasticsearch as the search engine
+
 
 ### The Project's Future
 
