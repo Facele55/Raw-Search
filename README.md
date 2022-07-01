@@ -19,3 +19,10 @@
     • Give a more useful services
     • User interface improvements
 
+
+##### Front page
+![Front Page](static/screenshots/front_page.png)
+
+##### Admin Page
+![Front Page](static/screenshots/admin_page.png)
+

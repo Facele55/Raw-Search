@@ -19,6 +19,10 @@ There is difference between different OS's
         base_command for Windows: python manage.py
 
 
+Docker:
+    docker-compose up
+
+
 Makemigrations:
 base_command makemigrations
 
