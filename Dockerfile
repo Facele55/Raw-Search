@@ -8,10 +8,12 @@ RUN mkdir /code
 WORKDIR /code
 
 # install psycopg2 dependencies
-RUN apk update && apk add --no-cache --virtual .build-deps gcc libc-dev libxml2 libxml2-dev && \
+RUN apk update && apk add --update --no-cache postgresql-client sqlite && \
+    apk add --no-cache --no-install-recommends --virtual .build-deps gcc libc-dev libxml2 libxml2-dev && \
     apk add --no-cache libxslt-dev && \
     pip install --no-cache-dir lxml>=3.5.0 && \
     apk del .build-deps
+
 
 
 COPY requirements.txt /code/
