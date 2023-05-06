@@ -12,6 +12,7 @@ from analytics.counts import *
 from core.models import Autocomplete
 from crawler.crawl_views import site_crawler, page_crawler
 from crawler.models import CrawlerPages, CrawlerSites, CrawlQueue
+from crawler.services import add_url_to_crawl_queue
 from feedback.models import Feedback, Support, Problem, Contact
 from rawsearch.settings import ELASTICSEARCH_DSL
 from .forms import EditUserPermForm, QueueForm
@@ -180,10 +181,12 @@ class AddToQueueView(FormView):
 
     def form_valid(self, form):
         f = form.save(commit=False)
-        f.added_by = self.request.user.id
-        f.save()
-        form.save_m2m()
+        user = self.request.user.id
+        add_url_to_crawl_queue(url=f.url, status=f.page_site, user=user)
+        # f.save()
+        # form.save_m2m()
         return redirect(self.get_success_url())
+
 
 
 class AutocompleteFilter(django_filters.FilterSet):

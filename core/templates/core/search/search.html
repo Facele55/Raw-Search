@@ -15,6 +15,7 @@
        
         <div class="row">
             <div class="col-8">
+
                  {% for result in object_list %}
             <div class="clearfix">
                 <div class="search-result">
@@ -26,6 +27,7 @@
                             <a class="text-success" target="_blank" rel="nofollow" href="{{ result.url }}"> {{ result.url }}</a>
                         </small>
                         <p>
+                            {{result.description}}
                         </p>
                     </div>  <!--  item -->
                 </div>
@@ -33,10 +35,7 @@
         {% endfor %}
             </div>
             <div class="col-4">
-                {% for s in site %}
-                <a target="_blank" rel="nofollow" href="{{s.site_url}}">{{s.site_url}}</a>
-            {% endfor %}
-            
+                <a target="_blank" rel="nofollow" href="{{site}}">{{site}}</a>            
         </div>
         </div>
 

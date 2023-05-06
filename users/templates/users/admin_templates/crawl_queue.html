@@ -85,9 +85,31 @@
 
                                 <td>{{ q.get_added_by }}</td>
                                 <td>
-                                    {{ q.status }}
+                                    {{q.status}}
+                                    {% if q.status == 0 %}
+                                        {% trans 'Not crawled' %}
+                                    {% else %}
+                                        {% trans 'Crawled' %}
+                                    {% endif %}
                                 </td>
                                 <td>
+
+{% if q.page_site == 'site' %}
+Site
+
+
+
+{% elif q.page_site == 'page' %}
+    page
+{%else%}
+error
+{% endif %}
+
+                                    {% if q.status == 0 %}
+                                  <a href="{% url 'users:approve_site_crawl' q.id %}" class="btn btn-success">{% trans 'Crawl' %} </a>
+                              {% else %}
+                                  <a href="{% url 'users:approve_site_crawl' q.id %}" class="btn btn-warning">{% trans 'Update' %} </a>
+                              {% endif %}
                                     <a href="{% url 'crawler:delete_from_queue' q.id %}"
                                        class="btn btn-danger">{% trans 'Delete' %} </a>
                                 </td>

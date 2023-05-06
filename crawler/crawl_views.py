@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 from usp.tree import sitemap_tree_for_homepage
 
-from crawler.models import CrawlerPages, CrawlerSites
+from crawler.models import CrawlerPages, CrawlerSites, CrawlQueue
 from feedback.models import Problem
 from .tasks import crawl_page_content, add_site_to_search
 from .utils import get_domain_name, get_sub_domain_name
@@ -26,6 +26,13 @@ crawler_pages = CrawlerPages.objects.using('crawler_db').all()
 crawler_sites = CrawlerSites.objects.using('crawler_db').all()
 problem = Problem.objects.using('feedback_db').all()
 content_search = ContentSearchIndex.objects.using('search_db').all()
+
+
+def update_crawl_q_status(url: str, status: int):
+    cq = CrawlQueue.objects.using('crawler_db').filter(url=url).latest()
+    cq.status = status
+    print('cq', cq, status)
+    cq.save()
 
 
 def site_crawler(iii: int) -> None:
@@ -57,6 +64,7 @@ def site_crawler(iii: int) -> None:
             internal_links=url_list,
             status=1
         )
+        update_crawl_q_status(url, status=1)
     except (TypeError, AttributeError) as type_attr_err:
         logger.error("Crawler, crawl_views, site_crawler; adding to db crawl site url %s ;"
                      "got exception TypeError, AttributeError %s", url, type_attr_err)
@@ -79,12 +87,14 @@ def crawl_page_func(url: str) -> None:
             cp_c = crawler_pages.create(cr_url=url, cr_content=str(soup), status=3)
             cp_c.save()
             crawl_page_content(crid=cp_c.id)
+            update_crawl_q_status(url, status=3)
         except Exception as ex:
             logger.error("Crawler, crawl_views, crawl_page_func, exception: %s", str(ex))
     else:
         try:
             cp = crawler_pages.filter(cr_url=url).update(cr_url=url, cr_content=str(soup), status=2)
             crawl_page_content(crid=cp.id)
+            update_crawl_q_status(url, status=2)
         except Exception as ex:
             logger.error("Crawler, crawl_views, crawl_page_func, exception: %s", str(ex))
         logger.info("Crawler, crawl_views, crawl_page_func; updating db crawl site url %s", url)

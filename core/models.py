@@ -25,7 +25,6 @@ class ContentSearchIndex(models.Model):
 	status = models.IntegerField(default=0)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
-	objects = models.Manager()
 
 	class Meta:
 		verbose_name = "Content Search Index"
@@ -46,7 +45,6 @@ class ImageSearchIndex(models.Model):
 	crawler_fk_pages = models.IntegerField(null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
-	objects = models.Manager()
 
 	class Meta:
 		verbose_name = "Image Search Index"
@@ -65,7 +63,6 @@ class VideoIndex(models.Model):
 	status = models.IntegerField(default=0)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
-	objects = models.Manager()
 
 	class Meta:
 		verbose_name = "Video Index"
@@ -83,7 +80,6 @@ class SiteSearchIndex(models.Model):
 	status = models.IntegerField(default=0)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
-	objects = models.Manager()
 
 	class Meta:
 		verbose_name = "Site Search Index"
@@ -99,7 +95,6 @@ class SearchQueries(models.Model):
 	query = models.TextField()
 	status = models.IntegerField(default=0)
 	created_at = models.DateTimeField(auto_now_add=True)
-	objects = models.Manager()
 
 	def __str__(self):
 		return f"{self.query}"
@@ -116,7 +111,6 @@ class Autocomplete(models.Model):
 	status = models.CharField(verbose_name=_("Status"), max_length=20, choices=AUTOCOMPLETE_STATUSES, default='pending')
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
-	objects = models.Manager
 
 	def __str__(self):
 		return self.name

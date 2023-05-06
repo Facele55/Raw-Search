@@ -96,6 +96,8 @@
                                     {% endif %}
                                 </td>
                             </tr>
+                            {% empty %}
+                      <tr> <td>{% trans 'No data' %}</td> </tr>
                         {% endfor %}
                         </tbody>
                     </table>

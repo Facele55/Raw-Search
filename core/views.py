@@ -2,6 +2,8 @@ from elasticsearch import Elasticsearch
 import logging
 import time
 from urllib import request
+from urllib.parse import urlparse
+
 
 from django.views.generic import ListView
 from elasticsearch_dsl import Q
@@ -18,6 +20,7 @@ class SearchList(ListView):
 	paginate_by = 10
 	count = 0
 	time_queryset = 0
+	site = None
 
 	def get_context_data(self, *args, **kwargs):
 		context = super().get_context_data(*args, **kwargs)
@@ -25,7 +28,7 @@ class SearchList(ListView):
 		context['query'] = self.request.GET.get('q', '')
 		context['results'] = self.get_queryset()
 		context['total'] = self.time_queryset
-		context['site'] = site_results(self.request.GET.get('q', ''))
+		context['site'] = self.site or None
 		add_query(q=self.request.GET.get('q'))
 		return context
 
@@ -42,9 +45,41 @@ class SearchList(ListView):
 				#  .sort('site_lang') - not working
 				# .sort({"_score": {"order": "desc"}})
 				response = new_results.execute()
-				end_time = time.time()
+				        # Define the Elasticsearch query
+				# s = Search(index=ContentSearchDocument)
+				# q = Q('multi_match', query=query, fields=['title^3', 'site_content'])
+				# s = s.query(q)
+				# end_time = time.time()
+				# print(f"Score {response.hits.max_score}")
+
+		        # Execute the query and get the search results
+				# response = s.execute()
+				hits = response['hits']['hits']
+				first_url = hits[0]["_source"]['url']
+				# print(hits[0]["_source"]['url'])
+				parsed_url = urlparse(first_url)
+				host = parsed_url.netloc
+				print(host)
+				self.site = host
+
+				# hits = [hit for hit in response.hits.hits]
+				# print(type(hits))
+				# for hit in response.hits:
+				# 	print(hit)
+					# first_item = next(iter(hit.to_dict().items()))
+					# print(first_item)
+					# parsed_url = urlparse(hit.to_dict()['url'])
+					# host = parsed_url.netloc
+					# print(host)
+
+
+
+				# for i in hits:
+				# 	print(i)
+
 				self.count = response.hits.total.value  # since qs is actually a list
-				self.time_queryset = end_time - start_time
+				self.time_queryset = response.hits.max_score
+				# return hits if hits else []
 				return response if response is not None else []
 			except (ConnectionRefusedError, ConnectionError, BaseException) as err:
 				logger.exception("Search List | Exception: ConnectionError, TypeError, AttributeError %s", str(err))
@@ -55,23 +90,6 @@ class SearchList(ListView):
 
 		else:
 			return ContentSearchIndex.objects.using('search_db').none()
-
-
-def site_results(query: str):
-	if query is not None and query != "":
-		try:
-			site_result = SiteSearchDocument.search().extra(size=+10000).query("prefix", site_url=query)
-			site_response = site_result.execute()
-			return site_response if site_response is not None else []
-		except (ConnectionRefusedError, ConnectionError, BaseException) as err:
-			logger.exception(
-				"Site Search Results | Exception: ConnectionRefusedError, ConnectionError, BaseException %s", str(err))
-			return []
-		except Exception as ex:
-			logger.exception(request, "Site Search Results, Exception %s", str(ex))
-			return []
-	else:
-		return SiteSearchIndex.objects.using('search_db').none()
 
 
 class ImageList(ListView):

@@ -1,8 +1,9 @@
 import logging
+import requests
 
 from bs4 import BeautifulSoup
 
-from core.models import ContentSearchIndex, ImageSearchIndex, SiteSearchIndex
+from core.models import ContentSearchIndex, ImageSearchIndex, SiteSearchIndex, VideoIndex
 from crawler.models import CrawlerPages
 
 logger = logging.getLogger("django")
@@ -10,6 +11,15 @@ search_index_content = ContentSearchIndex.objects.using('search_db').all()
 crawler_pages = CrawlerPages.objects.using('crawler_db').all()
 image_search_index = ImageSearchIndex.objects.using('search_db').all()
 site_search_index = SiteSearchIndex.objects.using('search_db').all()
+
+
+headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Max-Age': '3600',
+    'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
+}
 
 
 def crawl_page_content(crid: int) -> None:
@@ -22,10 +32,11 @@ def crawl_page_content(crid: int) -> None:
 	:return:
 	"""
 	url = crawler_pages.get(id=crid).cr_url
+	video(vid_id=crid)
 	if search_index_content.filter(crawler_fk_pages=crid).exists():
 		try:
 			crawl_images_alt(idi=crid)
-			#video(vid_id=crid)
+			video(vid_id=crid)
 			search_index_content.filter(crawler_fk_pages=crid).update(url=url, title=crawl_title(crid),
 			                                                          keywords=crawl_keyword(idl=crid),
 			                                                          description=crawl_desc(id_desc=crid),
@@ -37,7 +48,7 @@ def crawl_page_content(crid: int) -> None:
 	else:
 		try:
 			crawl_images_alt(idi=crid)
-			#video(vid_id=crid)
+			video(vid_id=crid)
 			sic = search_index_content.create(url=url, title=crawl_title(crid), keywords=crawl_keyword(idl=crid),
 			                                  description=crawl_desc(id_desc=crid), site_lang=crawl_lang(crid),
 			                                  site_content=crawl_content(crid), crawler_fk_pages=crid)
@@ -53,12 +64,40 @@ def video(vid_id):
 	:return:
 	"""
 	to_crawl = crawler_pages.get(id=vid_id)
-	soup = BeautifulSoup(to_crawl.cr_content, "lxml")
-	# List of all video tag
+	soup = BeautifulSoup(to_crawl.cr_content, "html.parser")
+	video_url = ''
+	iframe_url = ''
 	video_tags = soup.find_all('video')
-	for video_tag in video_tags:
-		# video_url = video_tag.find("a")['href']
-		print(video_tag)
+	if video_tags:
+		for vtag in video_tags:
+			video_url = vtag['src']
+			# video_width = vtag['width']
+			# video_height = vtag['height']
+			if video_url.startswith('//'):
+				video_url = video_url[2:]
+
+	# Find the <iframe> tag and extract the video URL
+	iframe_tag = soup.find_all('iframe')
+	# print('iframe', iframe_tag)
+	if iframe_tag:
+		for tag in iframe_tag:
+			if tag['src'].endswith('html'):
+				continue
+			iframe_url = tag['src']
+
+	# url_list = [video_url, iframe_url]
+	# print(url_list)
+	if any(iframe_url or video_url):
+		if not VideoIndex.objects.using('search_db').filter(video_src_url=[video_url, iframe_url]).exists():
+			vi = VideoIndex.objects.using('search_db').create(video_src_url=[video_url, iframe_url])
+			vi.save(using='search_db')
+		else:
+			pass
+			# VideoIndex.objects.using('search_db').update(video_src_url=[video_url, iframe_url])
+	else:
+		pass
+
+
 
 
 def add_site_to_search(site_url: str) -> None:
@@ -98,7 +137,7 @@ def crawl_images_alt(idi: int) -> None:
 			            to_crawl.cr_url, img_src, image_alt)
 		elif image_alt == 'None':
 			# image_alt = img_src.split("/")[-1]
-			print(img_src, image_alt, idi)
+			# print(img_src, image_alt, idi)
 			logger.info("Crawler, tasks, crawl_images_alt name None; url %s, img_src: %s, image alt: %s",
 				to_crawl.cr_url, img_src, image_alt)
 		elif image_alt.startswith('data:'):
@@ -156,8 +195,11 @@ def crawl_content(idc: int) -> str:
 	soup = BeautifulSoup(to_crawl.cr_content, "lxml")
 	for s in soup.select('footer'):
 		s.extract()
-		contents = soup.text.strip().replace("\n", " ")
-		return str(contents)
+		content = soup.text.strip().replace("\n", " ")
+		# print(f"Footer {content}")
+	# contents = soup.text.strip().replace("\n", " ")
+	# print(f"Content: {contents}")
+	return str(contents)
 
 
 def crawl_lang(idl: int) -> str:

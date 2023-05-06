@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'dbbackup_ui',
     'smuggler',
     'django_filters',
+    'django_elasticsearch_dsl',
 
     'core.apps.CoreConfig',
     'analytics.apps.AnalyticsConfig',
@@ -272,7 +273,8 @@ LOGGING = {
 }
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': os.getenv('ES_PORT'),  # '0.0.0.0:9200'
+        'hosts': 'localhost:9200',  # '0.0.0.0:9200'
+        # 'hosts': os.getenv('ES_PORT'),  # '0.0.0.0:9200'
     },
 }
 

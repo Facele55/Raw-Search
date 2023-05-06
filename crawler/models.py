@@ -13,7 +13,6 @@ class CrawlerPages(models.Model):
     added_by = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    objects = models.Manager
 
     class Meta:
         verbose_name = "Crawled Page"
@@ -44,7 +43,6 @@ class CrawlerSites(models.Model):
     added_by = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    objects = models.Manager
 
     class Meta:
         verbose_name = "Crawler Site"
